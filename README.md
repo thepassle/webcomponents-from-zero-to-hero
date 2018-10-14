@@ -528,11 +528,36 @@ Phew, now that we're done with the hard bits, it's time to get to the fun stuff.
 
 First, we're going to have to keep track of the `index` of our `to-do-item`s. Let's set up an attribute!
 
-Add the following getters and setters to `to-do-item.js`:
+`to-do-item.js`:
+
+```js
+static get observedAttributes() {
+    return ['text', 'checked', 'index'];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+    switch(name){
+        case 'text':
+            this._text = newValue;
+            break;
+        case 'checked':
+            this._checked = this.hasAttribute('checked');
+            break;
+        case 'index':
+            this._index = parseInt(newValue);
+            break;
+    }
+}
+```
+
+>❗ Note how we're parsing the String type value to an integer here, since attributes only allow a String type, but we'd like the end user to be able to get the index _property_ as an integer.
+
+And let's reflect it to a property as well, add the following getters and setters to `to-do-item.js`:
 
 ```js
 set index(val) {
     this._index = val;
+    this.setAttribute('index', val);
 }
 
 get index() {
@@ -552,9 +577,10 @@ _renderTodoList() {
 
         if(todo.checked) {
             $todoItem.setAttribute('checked', '');                
-        }
+	    }
 
-        $todoItem.index = index;
+        $todoItem.setAttribute('index', index);
+        
         $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
 
         this.$todoList.appendChild($todoItem);
@@ -562,7 +588,7 @@ _renderTodoList() {
 }
 ```	
 
-Note how we're setting `$todoItem.index = index;`. We now have some state to keep track of the index of the to-do. We've also set up an event listener to listen for an `onRemove` event on the `to-do-item` element.
+Note how we're setting `$todoItem.setAttribute('index', index);`. We now have some state to keep track of the index of the to-do. We've also set up an event listener to listen for an `onRemove` event on the `to-do-item` element.
 
 Next, we'll have to _fire_ the event when we click the remove button. Change the `connectedCallback` of `to-do-item.js` to the following:
 
