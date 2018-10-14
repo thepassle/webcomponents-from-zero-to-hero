@@ -109,13 +109,13 @@ The adoptedCallback is called each time the custom element is moved to a new doc
 
 ### registering our element
 
-And finally, though not part of the lifecycle, we register our element to the Custom Elements registry like so:
+And finally, though not part of the lifecycle, we register our element to the `CustomElementRegistry` like so:
 
 ```js
 window.customElements.define('my-element', MyElement);
 ```
 
-The first argument will be the name of the element, so in this case it'll register `<my-element>`, and the second argument passes the class we made.
+The `CustomElementRegistry` is an interface that provides methods for registering custom elements and querying registered elements. The first argument of the registries' `define` method will be the name of the element, so in this case it'll register `<my-element>`, and the second argument passes the class we made.
 
 > ✨ _Hey! Listen!_
 
