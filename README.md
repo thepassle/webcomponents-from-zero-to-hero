@@ -1,6 +1,15 @@
 # Web components: from zero to hero
 ## _An introduction to writing vanilla web components_
 
+- [What are web components?](#-what-are-web-components)
+- [A Component's lifecycle](#-a-components-lifecycle)
+- [Building our to-do app](#-building-our-to-do-app)
+- [Setting properties](#-setting-properties)
+- [Setting attributes](#-setting-attributes)
+- [Reflecting attributes to properties](#-reflecting-attributes-to-properties)
+- [Events](#-events)
+- [Browser support and polyfills](#-browser-support-and-polyfills)
+- [Wrapping up](#wrapping-up)
 
 Web components are getting more and more traction. With the Edge team's recent announcement of implementing Custom Elements and Shadow DOM, all major browsers will soon support web components natively. Companies like Github, Netflix, Youtube and ING are even already using web components in production. Neat! However, surprisingly enough, none of those huge, succesful companies have implemented a (you guessed it) _to-do app!_
 
@@ -288,7 +297,7 @@ This should be easy enough to follow, we set up some `querySelectors` and `addEv
 
 ![add](https://i.imgur.com/v7Qzi8b.png)
 	
-## 💅 Setting some attributes
+## 💅 Setting attributes
 
 
 This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting attributes to properties_. Hold on tight!
