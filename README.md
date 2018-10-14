@@ -17,7 +17,7 @@ So today, we'll be making a to-do app, because the world doesn't have enough imp
 
 ## 🙋 What are web components?
 
-First things first : [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
+First things first: [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
 
 But before we start getting our hands dirty, lets take a look at the specifications that let us write web components.
 
