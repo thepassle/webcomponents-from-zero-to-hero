@@ -141,7 +141,7 @@ Let's start with an overview of what we're going to build.
 
 - A `<to-do-item>` element:
 	- Contains a description _attribute_
-	- Contains an index _property_
+	- Contains an index _attribute_
 	- Contains a checked _attribute_
 	
 Great! Let's lay out the groundwork for our to-do-app:
