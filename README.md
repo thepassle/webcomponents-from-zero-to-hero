@@ -17,7 +17,7 @@ So today, we'll be making a to-do app, because the world doesn't have enough imp
 
 ## 🙋 What are web components?
 
-First things first. Web components are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
+First things first : [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
 
 But before we start getting our hands dirty, lets take a look at the specifications that let us write web components.
 
@@ -27,7 +27,7 @@ The [Custom Elements](https://w3c.github.io/webcomponents/spec/custom/) api allo
 
 ### Shadow DOM:
 
-[Shadow DOM](https://w3c.github.io/webcomponents/spec/custom/) gives us a way to encapsulate the styling and markup of our components. It's a sub dom tree attached to a DOM element, to make sure none of our styling leaks out, or gets overwritten by any external styles. This makes it great for modularity.
+[Shadow DOM](https://w3c.github.io/webcomponents/spec/custom/) gives us a way to encapsulate the styling and markup of our components. It's a sub DOM tree attached to a DOM element, to make sure none of our styling leaks out, or gets overwritten by any external styles. This makes it great for modularity.
 
 ### ES Modules:
 
@@ -96,7 +96,7 @@ static get observedAttributes() {
 }
 ```
 
-In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will be ran. We'll go more in-depth on this later this blogpost.
+In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will be ran. We'll go more in-depth on this later this blog post.
 
 > ✨ _Hey! Listen!_
 > 
@@ -121,7 +121,7 @@ The first argument will be the name of the element, so in this case it'll regist
 
 > It's important to note how we name our web components. Custom element names must always contain a hyphen. For example: `<my-element>` is correct, and `<myelement>` is not. This is done deliberately to avoid clashing element names, and to create a distinction between custom elements and regular elements.
 > 
-> Custom elements also cannot be self-closing because HTML only allows a few elements to be self-closing. These are called _void elements_, like `<br/>` or `<img/>`, or; elements that don't allow children nodes.
+> Custom elements also cannot be self-closing because HTML only allows a few elements to be self-closing. These are called _void elements_, like `<br/>` or `<img/>`, or elements that don't allow children nodes.
 > 
 > Allowing self-closing elements would require a change in the HTML parser, which is a problem since HTML parsing is security sensitive. HTML producers need to be able to rely on how a given piece of HTML parses in order to be able to implement XSS-safe HTML generation.
 
@@ -134,10 +134,10 @@ Now that we're done with all the boring stuff, we can finally get our hands dirt
 Let's start with an overview of what we're going to build.
 
 - A `<to-do-app>` element:
-	- Contains an array of to do's as _property_
-	- Adds a to do
-	- Removes a to do
-	- Toggles a to do
+	- Contains an array of to-do's as _property_
+	- Adds a to-do
+	- Removes a to-do
+	- Toggles a to-do
 
 - A `<to-do-item>` element:
 	- Contains a description _attribute_
@@ -192,7 +192,7 @@ Great! Let's lay out the groundwork for our to-do-app:
     window.customElements.define('to-do-app', TodoApp);
 })();
 ```
-> Notice how we used an _IIFE_ to provide some extra privacy.
+> Notice how we used an [_IIFE_](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) to provide some extra privacy.
 
 
 We're going to take this step by step. We first create a `<template>` by calling `const template = document.createElement('template');`, and then we set some HTML in it. We only set the innerHTML on the template _once_. The reason we're using a template is because cloning templates is much cheaper than calling `.innerHTML` for all instances of our component.
@@ -219,7 +219,7 @@ We have a global `h1` styling that makes any h1 in the light DOM a red color. Bu
 > 
 > ### Closed shadow DOM:
 > 
-> Closed shadow roots are not very applicable, as it prevents any external javascript from piercing the shadowroot. Closed shadow DOM makes your component less flexible for yourself, your end users and should generally be avoided.
+> Closed shadow roots are not very applicable, as it prevents any external javascript from piercing the shadowroot. Closed shadow DOM makes your component less flexible for yourself and your end users and should generally be avoided.
 >
 > Some examples of elements that do use a closed shadow DOM are the `<video>` element.
 
@@ -269,7 +269,7 @@ We've now succesfully set some _properties_ on our component, and it should curr
 
 ![todolist](https://i.imgur.com/I0IkxNp.png)
 
-Great! Except it's still useless. Let's quickly implement some functionality to add new to-do's to our list.
+Great! Except it's still useless because we cannot interact with anything without using the console. Let's quickly implement some functionality to add new to-do's to our list.
 
 ```js
 class TodoApp extends HTMLElement {
@@ -370,7 +370,7 @@ First, let's create a `<to-do-item>` element.
 })();
 
 ```
-> Note that since we're using an IIFE, we're able to use `    const template = document.createElement('template');` again, without overriding the previous template we made.
+> Note that since we're using an IIFE, we're able to use `const template = document.createElement('template');` again, without overriding the previous template we made.
 
 And lets change our `_renderTodolist` function in `to-do-app.js` to this:
 
@@ -429,7 +429,7 @@ Our app should look like this, at this moment in time:
 
 We're not done with attributes just yet. It would be nice to be able to check off some of our to-do's when we're done with them, and we'll be using attributes for that as well. We have to handle our Boolean attributes a little differently though.
 
-> The presence of a boolean attribute on an element represents the true value, and the absence of the attribute represents the false value.
+> The presence of a boolean attribute on an element represents the `True` value, and the absence of the attribute represents the `False` value.
 
 > If the attribute is present, its value must either be the empty string or a value that is an ASCII case-insensitive match for the attribute's canonical name, with no leading or trailing whitespace.
 
@@ -677,7 +677,7 @@ Success! We can create, delete, and toggle to-do's!
 
 ## 👻 Browser support and polyfills
 
-The last thing I'd like to address in this blog post is browser support. At time of writing, the Microsoft Edge team have recently announced that they'll be implementing [custom elements](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/customelements/) as well as [shadow DOM](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/shadowdom/), meaning that all major browsers will soon natively support web components. 
+The last thing I'd like to address in this blog post is browser support. At time of writing, [the Microsoft Edge team has recently announced](https://twitter.com/MSEdgeUpdates/status/1049404076499320835) that they'll be implementing [custom elements](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/customelements/) as well as [shadow DOM](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/shadowdom/), meaning that **all** major browsers will soon natively support web components. 
 
 Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google.
 
@@ -689,4 +689,4 @@ But as you can probably tell, a lot of the code that we've written may feel a li
 
 "_Web components are neat, but I don't want to spend all this time writing boiler plate and setting stuff imperatively, I want to write declarative code!_", you cry. 
 
-Enter lit-html, which we'll cover in the next blog post.
+Enter [lit-html](https://polymer.github.io/lit-html/), which we'll cover in the next blog post.
