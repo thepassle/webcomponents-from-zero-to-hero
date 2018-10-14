@@ -3,6 +3,7 @@
     template.innerHTML = `
         <style>
             :host {
+                display: block;
                 font-family: sans-serif;
             }
 

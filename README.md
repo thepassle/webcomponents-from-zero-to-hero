@@ -316,6 +316,7 @@ First, let's create a `<to-do-item>` element.
     template.innerHTML = `
         <style>
             :host {
+                display: block;
                 font-family: sans-serif;
             }
 
