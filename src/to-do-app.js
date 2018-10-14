@@ -39,6 +39,7 @@ import './to-do-item.js';
             this.$todoList = this._shadowRoot.querySelector('ul');
 
             this.$input = this._shadowRoot.querySelector('input');
+            this.$input.addEventListener('keyup', (e) => {if (e.keyCode === 13) {this._addTodo()}});
             this.$submitButton = this._shadowRoot.querySelector('button');
             this.$submitButton.addEventListener('click', this._addTodo.bind(this));
         }
@@ -57,9 +58,11 @@ import './to-do-item.js';
         }
 
         _addTodo() {
-            this._todos.push({ text: this.$input.value, checked: false })
-            this._renderTodoList();
-            this.$input.value = '';
+            if(this.$input.value.length > 0){
+                this._todos.push({ text: this.$input.value, checked: false })
+                this._renderTodoList();
+                this.$input.value = '';
+            }
         }
 
         _renderTodoList() {
