@@ -129,7 +129,7 @@ The first argument will be the name of the element, so in this case it'll regist
 
 > - [x] Boring stuff.
 
-Now that we're done with all the boring stuff, we can finally get our hands dirty and start building our to do app!
+Now that we're done with all the boring stuff, we can finally get our hands dirty and start building our to do app! Click [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/) to see the end result.
 
 Let's start with an overview of what we're going to build.
 
