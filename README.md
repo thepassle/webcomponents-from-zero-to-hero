@@ -2,7 +2,7 @@
 ## _An introduction to writing vanilla web components_
 
 - [What are web components?](#-what-are-web-components)
-- [A Component's lifecycle](#-a-components-lifecycle)
+- [A Components lifecycle](#-a-components-lifecycle)
 - [Building our to-do app](#-building-our-to-do-app)
 - [Setting properties](#-setting-properties)
 - [Setting attributes](#-setting-attributes)
