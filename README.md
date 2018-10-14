@@ -118,7 +118,7 @@ window.customElements.define('my-element', MyElement);
 The `CustomElementRegistry` is an interface that provides methods for registering custom elements and querying registered elements. The first argument of the registries' `define` method will be the name of the element, so in this case it'll register `<my-element>`, and the second argument passes the class we made.
 
 > ✨ _Hey! Listen!_
-
+>
 > It's important to note how we name our web components. Custom element names must always contain a hyphen. For example: `<my-element>` is correct, and `<myelement>` is not. This is done deliberately to avoid clashing element names, and to create a distinction between custom elements and regular elements.
 > 
 > Custom elements also cannot be self-closing because HTML only allows a few elements to be self-closing. These are called _void elements_, like `<br/>` or `<img/>`, or elements that don't allow children nodes.
