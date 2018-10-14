@@ -13,7 +13,7 @@
 
 Web components are getting more and more traction. With the Edge team's recent announcement of implementing Custom Elements and Shadow DOM, all major browsers will soon support web components natively. Companies like Github, Netflix, Youtube and ING are even already using web components in production. Neat! However, surprisingly enough, none of those huge, succesful companies have implemented a (you guessed it) _to-do app!_
 
-So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet.
+So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet. You can take a look at what we'll be making [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/).
 
 ## 🙋 What are web components?
 
