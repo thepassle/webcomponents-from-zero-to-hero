@@ -50,9 +50,9 @@ import './to-do-item.js';
         }
 
         _toggleTodo(e) {
-            const item = this._todos[e.detail];
-            this._todos[e.detail] = Object.assign({}, item, {
-                checked: !item.checked
+            const todo = this._todos[e.detail];
+            this._todos[e.detail] = Object.assign({}, todo, {
+                checked: !todo.checked
             });
             this._renderTodoList();
         }
@@ -68,19 +68,19 @@ import './to-do-item.js';
         _renderTodoList() {
             this.$todoList.innerHTML = '';
 
-            this._todos.forEach((item, index) => {
-                let $item = document.createElement('to-do-item');
-                $item.setAttribute('text', item.text);
+            this._todos.forEach((todo, index) => {
+                let $todoItem = document.createElement('to-do-item');
+                $todoItem.setAttribute('text', todo.text);
 
-                if(item.checked) {
-                    $item.setAttribute('checked', '');                
+                if(todo.checked) {
+                    $todoItem.setAttribute('checked', '');                
                 }
 
-                $item.index = index;
-                $item.addEventListener('onRemove', this._removeTodo.bind(this));
-                $item.addEventListener('onToggle', this._toggleTodo.bind(this));
+                $todoItem.index = index;
+                $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
+                $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 
-                this.$todoList.appendChild($item);
+                this.$todoList.appendChild($todoItem);
             });
         }
 

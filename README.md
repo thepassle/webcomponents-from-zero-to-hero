@@ -238,10 +238,10 @@ class TodoApp extends HTMLElement {
     _renderTodoList() {
         this.$todoList.innerHTML = '';
 
-        this._todos.forEach((item, index) => {
-            let $item = document.createElement('div');
-            $item.innerHTML = item.text; 
-            this.$todoList.appendChild($item);
+        this._todos.forEach((todo, index) => {
+            let $todoItem = document.createElement('div');
+            $todoItem.innerHTML = todo.text; 
+            this.$todoList.appendChild($todoItem);
         });
     }
 
@@ -382,10 +382,10 @@ class TodoApp extends HTMLElement {
         _renderTodoList() {
             this.$todoList.innerHTML = '';
 
-            this._todos.forEach((item, index) => {
-                let $item = document.createElement('to-do-item');
-                $item.setAttribute('text', item.text);
-                this.$todoList.appendChild($item);
+            this._todos.forEach((todo, index) => {
+                let $todoItem = document.createElement('to-do-item');
+                $todoItem.setAttribute('text', todo.text);
+                this.$todoList.appendChild($todoItem);
             });
         }
         
@@ -456,16 +456,16 @@ Change your `to-do-app.js` to this:
 _renderTodoList() {
     this.$todoList.innerHTML = '';
 
-    this._todos.forEach((item, index) => {
-        let $item = document.createElement('to-do-item');
-        $item.setAttribute('text', item.text);
+    this._todos.forEach((todo, index) => {
+        let $todoItem = document.createElement('to-do-item');
+        $todoItem.setAttribute('text', todo.text);
 
 		 // if our to-do is checked, set the attribute, else; omit it.
-        if(item.checked) {
-            $item.setAttribute('checked', '');                
+        if(todo.checked) {
+            $todoItem.setAttribute('checked', '');                
         }
 
-        this.$todoList.appendChild($item);
+        this.$todoList.appendChild($todoItem);
     });
 }
 ```
@@ -546,23 +546,23 @@ And change our `_renderTodoList` function in `to-do-app.js` to:
 _renderTodoList() {
     this.$todoList.innerHTML = '';
 
-    this._todos.forEach((item, index) => {
-        let $item = document.createElement('to-do-item');
-        $item.setAttribute('text', item.text);
+    this._todos.forEach((todo, index) => {
+        let $todoItem = document.createElement('to-do-item');
+        $todoItem.setAttribute('text', todo.text);
 
-        if(item.checked) {
-            $item.setAttribute('checked', '');                
+        if(todo.checked) {
+            $todoItem.setAttribute('checked', '');                
         }
 
-        $item.index = index;
-        $item.addEventListener('onRemove', this._removeTodo.bind(this));
+        $todoItem.index = index;
+        $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
 
-        this.$todoList.appendChild($item);
+        this.$todoList.appendChild($todoItem);
     });
 }
 ```	
 
-Note how we're setting `$item.index = index;`. We now have some state to keep track of the index of the to-do. We've also set up an event listener to listen for an `onRemove` event on the `to-do-item` element.
+Note how we're setting `$todoItem.index = index;`. We now have some state to keep track of the index of the to-do. We've also set up an event listener to listen for an `onRemove` event on the `to-do-item` element.
 
 Next, we'll have to _fire_ the event when we click the remove button. Change the `connectedCallback` of `to-do-item.js` to the following:
 
@@ -607,9 +607,9 @@ class TodoApp extends HTMLElement {
     ...
    
     _toggleTodo(e) {
-        const item = this._todos[e.detail];
-        this._todos[e.detail] = Object.assign({}, item, {
-            checked: !item.checked
+        const todo = this._todos[e.detail];
+        this._todos[e.detail] = Object.assign({}, todo, {
+            checked: !todo.checked
         });
         this._renderTodoList();
     }
@@ -618,19 +618,19 @@ class TodoApp extends HTMLElement {
     _renderTodoList() {
         this.$todoList.innerHTML = '';
 
-        this._todos.forEach((item, index) => {
-            let $item = document.createElement('to-do-item');
-            $item.setAttribute('text', item.text);
+        this._todos.forEach((todo, index) => {
+            let $todoItem = document.createElement('to-do-item');
+            $todoItem.setAttribute('text', todo.text);
 
-            if(item.checked) {
-                $item.setAttribute('checked', '');                
+            if(todo.checked) {
+                $todoItem.setAttribute('checked', '');                
             }
 
-            $item.index = index;
-            $item.addEventListener('onRemove', this._removeTodo.bind(this));
-            $item.addEventListener('onToggle', this._toggleTodo.bind(this));
+            $todoItem.index = index;
+            $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
+            $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 
-            this.$todoList.appendChild($item);
+            this.$todoList.appendChild($todoItem);
         });
     }
 	
