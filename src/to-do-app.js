@@ -73,10 +73,11 @@ import './to-do-item.js';
                 $todoItem.setAttribute('text', todo.text);
 
                 if(todo.checked) {
-                    $todoItem.setAttribute('checked', '');                
+                    $todoItem.setAttribute('checked', '');
                 }
 
-                $todoItem.index = index;
+                $todoItem.setAttribute('index', index);
+                
                 $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
                 $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 

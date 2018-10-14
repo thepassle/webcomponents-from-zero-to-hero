@@ -1,5 +1,3 @@
-
-
 (() => {
     const template = document.createElement('template');
     template.innerHTML = `
@@ -40,12 +38,10 @@
             this.$checkbox = this._shadowRoot.querySelector('input');
 
             this.$removeButton.addEventListener('click', (e) => {
-                e.preventDefault();
                 this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
             });
 
             this.$checkbox.addEventListener('click', (e) => {
-                e.preventDefault();
                 this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
             });
 
@@ -53,7 +49,7 @@
         }
 
         static get observedAttributes() {
-            return ['text', 'checked'];
+            return ['text', 'checked', 'index'];
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
@@ -64,11 +60,15 @@
                 case 'checked':
                     this._checked = this.hasAttribute('checked');
                     break;
+                case 'index':
+                    this._index = parseInt(newValue);
+                    break;
             }
         }
 
         set index(val) {
             this._index = val;
+            this.setAttribute('index', val);
         }
 
         get index() {
@@ -101,4 +101,3 @@
     }
     window.customElements.define('to-do-item', TodoItem);
 })();
-
