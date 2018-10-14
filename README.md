@@ -557,7 +557,6 @@ And let's reflect it to a property as well, add the following getters and setter
 
 ```js
 set index(val) {
-    this._index = val;
     this.setAttribute('index', val);
 }
 

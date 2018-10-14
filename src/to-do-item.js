@@ -68,7 +68,6 @@
         }
 
         set index(val) {
-            this._index = val;
             this.setAttribute('index', val);
         }
 
