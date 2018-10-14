@@ -551,9 +551,9 @@ attributeChangedCallback(name, oldValue, newValue) {
 }
 ```
 
->❗ Note how we're parsing the String type value to an integer here, since attributes only allow a String type, but we'd like the end user to be able to get the index _property_ as an integer.
+Note how we're parsing the String type value to an integer here, since attributes only allow a String type, but we'd like the end user to be able to get the index _property_ as an integer. And we also now have a nice example of how to deal with string/number/boolean attributes and how to reflect them to properties as their actual type.
 
-And let's reflect it to a property as well, add the following getters and setters to `to-do-item.js`:
+So let's reflect it to a property as well, add the following getters and setters to `to-do-item.js`:
 
 ```js
 set index(val) {
