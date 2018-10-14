@@ -1,0 +1,7 @@
+* Nice use of Emojis :D
+* Who do you target? Do they know about DOM, shadowing, encapsulation, intervals? Or can we use other words
+* And finally, though not part of the lifecycle, we register our element to the Custom Elements registry => Maybe worth mentioning what is the registry we are talkina about? Simply saying that the browser doesn't know about your new elements before you make it aware of it.
+* I would add another link to the Demo at the very beginning so it's obvious for people there is one
+* It would be worth explaining why we use _ and $.
+* You explain the differences between properties and attributes but never really define what they are exactly.
+* I like that your examples goes through a lot of useful stuff. The specs, properties and attributes, boolean . . . These are shown with proper use cases. Well thought :)
