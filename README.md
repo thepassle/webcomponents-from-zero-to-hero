@@ -96,7 +96,7 @@ static get observedAttributes() {
 }
 ```
 
-In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will be ran. We'll go more in-depth on this later this blog post.
+In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will run. We'll go more in-depth on this later this blog post.
 
 > ✨ _Hey! Listen!_
 > 
