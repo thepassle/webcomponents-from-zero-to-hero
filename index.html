@@ -4,19 +4,6 @@
 </body>
 
 <script>
-const app = document.querySelector('to-do-app');
-
-setTimeout(() => {
-app.todos = [
-  { text: 'Make a to-do list', checked: false },
-  { text: 'Finish blog post', checked: true }
-];
-}, 10)
-
-
-</script>
-
-<script type="module">
 	
 (() => {
     const template = document.createElement('template');
@@ -220,9 +207,17 @@ app.todos = [
     window.customElements.define('to-do-item', TodoItem);
 })();
 
+const app = document.querySelector('to-do-app');
 
-
-
+app.todos = [
+    { text: 'Make a demo', checked: true },
+    { text: 'The boring stuff', checked: false },
+    { text: 'Setting properties', checked: false },
+    { text: 'Setting attributes', checked: false },
+    { text: 'Reflecting properties to attributes', checked: false },
+    { text: 'Events', checked: false },
+    { text: 'Wrap it up', checked: false }
+];
 </script>
 </html>
 
