@@ -205,6 +205,8 @@ What this means is that we now have a DOM tree that will not leak any styles, or
 
 We have a global `h1` styling that makes any h1 in the light DOM a red color. But because we have our h1 in a shadow-root, it does not get overwritten by the global style.
 
+Note how in the component, we've used a `:host` pseudo class, this is how we can add styling to the component from the inside. An important thing to note is that the `display` is always set to `display: inline;`, which means you can't set a width or height on your element. So make sure to set a `:host` display style (e.g. block, inline-block, flex) unless you prefer the default of inline.
+
 > ✨ _Hey! Listen!_
 > 
 > Shadow DOM can be a little confusing. Allow me to expand a little bit on terminology:
