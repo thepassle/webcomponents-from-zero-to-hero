@@ -1,16 +1,24 @@
 <html>
+<head>
+	<script type="module" src="to-do-app.js"></script>
+</head>
 <body>
   <to-do-app></to-do-app>
 </body>
 
 <script>
-  const app = document.querySelector('to-do-app');
-  import('./to-do-app.js').then(() => {
-    app.todos = [
-      { text: 'Make a to-do list', checked: false },
-      { text: 'Finish blog post', checked: true }
-    ];
-});
+	const app = document.querySelector('to-do-app');
+	import('./to-do-app.js').then(() => {
+	    app.todos = [
+			{ text: 'Make a demo', checked: true },
+			{ text: 'The boring stuff', checked: false },
+			{ text: 'Setting properties', checked: false },
+			{ text: 'Setting attributes', checked: false },
+			{ text: 'Reflecting properties to attributes', checked: false },
+			{ text: 'Events', checked: false },
+			{ text: 'Wrap it up', checked: false }
+	    ];
+	});
 </script>
 </html>
 
