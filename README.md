@@ -6,7 +6,7 @@
 - [Building our to-do app](#-building-our-to-do-app)
 - [Setting properties](#-setting-properties)
 - [Setting attributes](#-setting-attributes)
-- [Reflecting attributes to properties](#-reflecting-attributes-to-properties)
+- [Reflecting properties to attributes](#-reflecting-attributes-to-properties)
 - [Events](#-events)
 - [Browser support and polyfills](#-browser-support-and-polyfills)
 - [Wrapping up](#wrapping-up)
@@ -16,6 +16,14 @@ Web components are getting more and more traction. With the Edge team's recent a
 So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet. You can take a look at what we'll be making [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/).
 
 ## 🙋 What are web components?
+
+> - [x] Make a demo
+> - [ ] The boring stuff
+> - [ ] Setting properties
+> - [ ] Setting attributes
+> - [ ] Reflecting properties to attributes
+> - [ ] Events
+> - [ ] Wrap it up
 
 First things first: [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
 
@@ -96,7 +104,7 @@ static get observedAttributes() {
 }
 ```
 
-In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will be ran. We'll go more in-depth on this later this blog post.
+In this case, any time the `my-attr` attribute is changed, the `attributeChangedCallback` will run. We'll go more in-depth on this later this blog post.
 
 > ✨ _Hey! Listen!_
 > 
@@ -127,7 +135,13 @@ The `CustomElementRegistry` is an interface that provides methods for registerin
 
 ## ⚒ Building our to do app
 
-> - [x] Boring stuff.
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [ ] Setting properties
+> - [ ] Setting attributes
+> - [ ] Reflecting properties to attributes
+> - [ ] Events
+> - [ ] Wrap it up
 
 Now that we're done with all the boring stuff, we can finally get our hands dirty and start building our to do app! Click [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/) to see the end result.
 
@@ -141,7 +155,7 @@ Let's start with an overview of what we're going to build.
 
 - A `<to-do-item>` element:
 	- Contains a description _attribute_
-	- Contains an index _property_
+	- Contains an index _attribute_
 	- Contains a checked _attribute_
 	
 Great! Let's lay out the groundwork for our to-do-app:
@@ -149,51 +163,47 @@ Great! Let's lay out the groundwork for our to-do-app:
 `to-do-app.js`:
 
 ```js
-(() => {
-    const template = document.createElement('template');
-    template.innerHTML = `
-        <style>
-            :host {
-                display: block;
-                font-family: sans-serif;
-                text-align: center;
-            }
-
-            button {
-                border: none;
-                cursor: pointer;
-            }
-
-            ul {
-                list-style: none;
-                padding: 0;
-            }
-        </style>
-        <h1>To do</h1>
-
-        <input type="text" placeholder="Add a new to do"></input>
-        <button>✅</button>
-
-        <ul id="todos"></ul>
-    `;
-
-    class TodoApp extends HTMLElement {
-        constructor() {
-            super();
-            this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-            this._shadowRoot.appendChild(template.content.cloneNode(true));
-        }
-
-        connectedCallback() {
-            this.$todoList = this._shadowRoot.querySelector('ul');
-        }
+const template = document.createElement('template');
+template.innerHTML = `
+<style>
+    :host {
+	display: block;
+	font-family: sans-serif;
+	text-align: center;
     }
 
-    window.customElements.define('to-do-app', TodoApp);
-})();
-```
-> Notice how we used an [_IIFE_](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) to provide some extra privacy.
+    button {
+	border: none;
+	cursor: pointer;
+    }
 
+    ul {
+	list-style: none;
+	padding: 0;
+    }
+</style>
+<h1>To do</h1>
+
+<input type="text" placeholder="Add a new to do"></input>
+<button>✅</button>
+
+<ul id="todos"></ul>
+`;
+
+class TodoApp extends HTMLElement {
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+        this.$todoList = this._shadowRoot.querySelector('ul');
+    }
+}
+
+window.customElements.define('to-do-app', TodoApp);
+```
 
 We're going to take this step by step. We first create a `<template>` by calling `const template = document.createElement('template');`, and then we set some HTML in it. We only set the innerHTML on the template _once_. The reason we're using a template is because cloning templates is much cheaper than calling `.innerHTML` for all instances of our component.
 
@@ -204,6 +214,8 @@ What this means is that we now have a DOM tree that will not leak any styles, or
 ![encapsulation](https://i.imgur.com/llF84Na.png)
 
 We have a global `h1` styling that makes any h1 in the light DOM a red color. But because we have our h1 in a shadow-root, it does not get overwritten by the global style.
+
+Note how in the component, we've used a `:host` pseudo class, this is how we can add styling to the component from the inside. An important thing to note is that the `display` is always set to `display: inline;`, which means you can't set a width or height on your element. So make sure to set a `:host` display style (e.g. block, inline-block, flex) unless you prefer the default of inline.
 
 > ✨ _Hey! Listen!_
 > 
@@ -300,78 +312,82 @@ class TodoApp extends HTMLElement {
 This should be easy enough to follow, we set up some `querySelectors` and `addEventListeners` in our `connectedCallback` (because we want the DOM to be attached!), and on a click event we want to push the input to our to-do's list, render it, and clear the input again. Ez 👏.
 
 ![add](https://i.imgur.com/v7Qzi8b.png)
-	
+    
 ## 💅 Setting attributes
 
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [x] Setting properties
+> - [ ] Setting attributes
+> - [ ] Reflecting properties to attributes
+> - [ ] Events
+> - [ ] Wrap it up
 
-This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting attributes to properties_. Hold on tight!
+This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting properties to attributes. Hold on tight!
 
 First, let's create a `<to-do-item>` element.
 
 `to-do-item.js`:
 
 ```js
-(() => {
-    const template = document.createElement('template');
-    template.innerHTML = `
-        <style>
-            :host {
-                display: block;
-                font-family: sans-serif;
-            }
-
-            .completed {
-                text-decoration: line-through;
-            }
-
-            button {
-                border: none;
-                cursor: pointer;
-            }
-        </style>
-        <li class="item">
-            <input type="checkbox">
-            <label></label>
-            <button>❌</button>
-        </li>
-    `;
-
-    class TodoItem extends HTMLElement {
-        constructor() {
-            super();
-            this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-            this._shadowRoot.appendChild(template.content.cloneNode(true));
-
-            this._text = '';
-        }
-
-        connectedCallback() {
-            this.$item = this._shadowRoot.querySelector('.item');
-            this.$removeButton = this._shadowRoot.querySelector('button');
-            this.$text = this._shadowRoot.querySelector('label');
-            this.$checkbox = this._shadowRoot.querySelector('input');
-
-            this._renderTodo();
-        }
-
-        static get observedAttributes() {
-            return ['text'];
-        }
-
-        attributeChangedCallback(name, oldValue, newValue) {
-            this._text = newValue;
-        }
-
-        _renderTodo() {
-            this.$text.innerHTML = this._text;
-        }
-
+const template = document.createElement('template');
+template.innerHTML = `
+<style>
+    :host {
+	display: block;
+	font-family: sans-serif;
     }
-    window.customElements.define('to-do-item', TodoItem);
-})();
+
+    .completed {
+	text-decoration: line-through;
+    }
+
+    button {
+	border: none;
+	cursor: pointer;
+    }
+</style>
+<li class="item">
+    <input type="checkbox">
+    <label></label>
+    <button>❌</button>
+</li>
+`;
+
+class TodoItem extends HTMLElement {
+	constructor() {
+	    super();
+	    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+	    this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+	    this._text = '';
+	}
+
+	connectedCallback() {
+	    this.$item = this._shadowRoot.querySelector('.item');
+	    this.$removeButton = this._shadowRoot.querySelector('button');
+	    this.$text = this._shadowRoot.querySelector('label');
+	    this.$checkbox = this._shadowRoot.querySelector('input');
+
+	    this._renderTodo();
+	}
+
+	static get observedAttributes() {
+	    return ['text'];
+	}
+
+	attributeChangedCallback(name, oldValue, newValue) {
+	    this._text = newValue;
+	}
+
+	_renderTodo() {
+	    this.$text.innerHTML = this._text;
+	 }
+}
+window.customElements.define('to-do-item', TodoItem);
 
 ```
-> Note that since we're using an IIFE, we're able to use `const template = document.createElement('template');` again, without overriding the previous template we made.
+> Note that since we're using a ES Modules, we're able to use `const template = document.createElement('template');` again, without overriding the previous template we made.
 
 And lets change our `_renderTodolist` function in `to-do-app.js` to this:
 
@@ -501,11 +517,19 @@ Nice! Our application should look like this:
 
 ![checked](https://i.imgur.com/SO3rCJU.png)
 	
-## ♺ Reflecting attributes to properties
+## ♺ Reflecting properties to attributes
 	
-Cool, our app is coming along nicely. But it would be nice if our end user would be able to query for the status of `checked` of our `to-do-item` component. We've currently set it only as an _attribute_, but we would like to have it available as a _property_ as well. This is called _reflecting attributes to properties_.
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [x] Setting properties
+> - [x] Setting attributes
+> - [ ] Reflecting properties to attributes
+> - [ ] Events
+> - [ ] Wrap it up
+    
+Cool, our app is coming along nicely. But it would be nice if our end user would be able to query for the status of `checked` of our `to-do-item` component. We've currently set it only as an _attribute_, but we would like to have it available as a _property_ as well. This is called _reflecting properties to attributes_.
 	
-All we have to do for this is adding some getters and setters. Add the following to your `to-do-item.js`:
+All we have to do for this is add some getters and setters. Add the following to your `to-do-item.js`:
 
 ```js
 get checked() {
@@ -524,6 +548,14 @@ set checked(val) {
 Now, every time we change the property or the attribute, the value will always be in sync.
 
 ## 🎉 Events
+
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [x] Setting properties
+> - [x] Setting attributes
+> - [x] Reflecting properties to attributes
+> - [ ] Events
+> - [ ] Wrap it up
 
 Phew, now that we're done with the hard bits, it's time to get to the fun stuff. Our application currently handles and exposes the data in a way we want to, but it doesn't actually remove or toggle the to-do's yet. Let's take care of that.
 
@@ -700,13 +732,31 @@ Success! We can create, delete, and toggle to-do's!
 
 ## 👻 Browser support and polyfills
 
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [x] Setting properties
+> - [x] Setting attributes
+> - [x] Reflecting properties to attributes
+> - [x] Events
+> - [ ] Wrap it up
+
 The last thing I'd like to address in this blog post is browser support. At time of writing, [the Microsoft Edge team has recently announced](https://twitter.com/MSEdgeUpdates/status/1049404076499320835) that they'll be implementing [custom elements](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/customelements/) as well as [shadow DOM](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/shadowdom/), meaning that **all** major browsers will soon natively support web components. 
 
 Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google.
 
 ## 💫 Wrapping up
 
-If you've made it all the way down here, congratulations! You've learned about the web components specifications, (light/open/closed) shadow DOM, templates, the difference between attributes and properties, and reflecting attributes to properties.
+> - [x] Make a demo
+> - [x] The boring stuff
+> - [x] Setting properties
+> - [x] Setting attributes
+> - [x] Reflecting properties to attributes
+> - [x] Events
+> - [x] Wrap it up
+
+> Done! 
+
+If you've made it all the way down here, congratulations! You've learned about the web components specifications, (light/open/closed) shadow DOM, templates, the difference between attributes and properties, and reflecting properties to attributes.
 
 But as you can probably tell, a lot of the code that we've written may feel a little clunky, we've written quite a lot of boiler plate (getters, setters, queryselectors, etc), and a lot of things have been handled imperatively. Our updates to the to do list aren't very performant, either.
 
