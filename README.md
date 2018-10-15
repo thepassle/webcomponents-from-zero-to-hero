@@ -87,7 +87,7 @@ We'll use the `constructor` for attaching the shadowroot, and setting up variabl
 
 ### connectedCallback()
 
-The `connectedCallback` is called when the element is inserted to the DOM. It's a good place to set event listeners, and querying any children nodes you might need, as well as internal state.
+The `connectedCallback` is called when the element is inserted to the DOM. It's a good place to set event listeners, and querying any children nodes you might need.
 
 
 ### disconnectedCallback()
