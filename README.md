@@ -15,7 +15,7 @@ Web components are getting more and more traction. With the Edge team's recent a
 
 So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet. You can take a look at what we'll be making [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/).
 
-Before we start, I'd like to add a little disclaimer that this blogpost is intended to get a better grip of the _basics_ of web components. Web components are low level, and should probably not be used to write full blown applications without the use of any helper libraries, nor should they be compared to full blown frameworks.
+Before we start, I'd like to add a little disclaimer that this blogpost is intended to get a better grasp of the _basics_ of web components. Web components are low level, and should probably not be used to write full blown applications without the use of any helper libraries, nor should they be compared to full blown frameworks.
 
 ## 🙋 What are web components?
 
