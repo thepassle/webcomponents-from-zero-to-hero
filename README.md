@@ -6,7 +6,7 @@
 - [Building our to-do app](#-building-our-to-do-app)
 - [Setting properties](#-setting-properties)
 - [Setting attributes](#-setting-attributes)
-- [Reflecting properties to attributes](#-reflecting-attributes-to-properties)
+- [Reflecting properties to attributes](#-reflecting-properties-to-attributes)
 - [Events](#-events)
 - [Browser support and polyfills](#-browser-support-and-polyfills)
 - [Wrapping up](#wrapping-up)
