@@ -1,5 +1,5 @@
 # Web components: from zero to hero
-## _An introduction to writing vanilla web components_
+## _An introduction to writing raw web components_
 
 - [What are web components?](#-what-are-web-components)
 - [A Components lifecycle](#-a-components-lifecycle)
