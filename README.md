@@ -81,14 +81,13 @@ window.customElements.define('my-element', MyElement);
 
 ### constructor()
 
-The `constructor` runs whenever an element is created, but _before_ the element is attached to the document. You should avoid touching any attributes or light DOM children as they may not be available yet.
+The `constructor` runs whenever an element is created, but _before_ the element is attached to the document. The constructor can be use for setting some initial state, setting up event listeners, and creating shadow DOM.
 
 We'll use the `constructor` for attaching the shadowroot, and setting up variables.
 
 ### connectedCallback()
 
-The `connectedCallback` is called when the element is inserted to the DOM. It's a good place to set event listeners, and querying any children nodes you might need, as well as internal state.
-
+The `connectedCallback` is called when the element is inserted to the DOM. It's a good place to run setup code, like fetching data, or setting default attributes.
 
 ### disconnectedCallback()
 
@@ -195,9 +194,6 @@ class TodoApp extends HTMLElement {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open' });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
-    }
-
-    connectedCallback() {
         this.$todoList = this._shadowRoot.querySelector('ul');
     }
 }
@@ -287,29 +283,31 @@ Great! Except it's still useless because we cannot interact with anything withou
 class TodoApp extends HTMLElement {
     ...
 
-    connectedCallback() {
-        this.$todoList = this._shadowRoot.querySelector('ul');
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
+        this.$todoList = this._shadowRoot.querySelector('ul');
         this.$input = this._shadowRoot.querySelector('input');
-	this.$input.addEventListener('keyup', (e) => {if (e.keyCode === 13) {this._addTodo()}});
 
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this));
     }
 
     _addTodo() {
-	if(this.$input.value.length > 0){
-		this._todos.push({ text: this.$input.value, checked: false })
-		this._renderTodoList();
-		this.$input.value = '';
-	}
+		if(this.$input.value.length > 0){
+			this._todos.push({ text: this.$input.value, checked: false })
+			this._renderTodoList();
+			this.$input.value = '';
+		}
     }
 
     ...
 }
 ```
 
-This should be easy enough to follow, we set up some `querySelectors` and `addEventListeners` in our `connectedCallback` (because we want the DOM to be attached!), and on a click event we want to push the input to our to-do's list, render it, and clear the input again. Ez 👏.
+This should be easy enough to follow, we set up some `querySelectors` and `addEventListeners` in our `constructor`, and on a click event we want to push the input to our to-do's list, render it, and clear the input again. Ez 👏.
 
 ![add](https://i.imgur.com/v7Qzi8b.png)
     
@@ -355,22 +353,46 @@ template.innerHTML = `
 `;
 
 class TodoItem extends HTMLElement {
-	constructor() {
-	    super();
-	    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-	    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-	    this._text = '';
-	}
+        this.$item = this._shadowRoot.querySelector('.item');
+        this.$removeButton = this._shadowRoot.querySelector('button');
+        this.$text = this._shadowRoot.querySelector('label');
+        this.$checkbox = this._shadowRoot.querySelector('input');
 
-	connectedCallback() {
-	    this.$item = this._shadowRoot.querySelector('.item');
-	    this.$removeButton = this._shadowRoot.querySelector('button');
-	    this.$text = this._shadowRoot.querySelector('label');
-	    this.$checkbox = this._shadowRoot.querySelector('input');
+        this.$removeButton.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
+        });
 
-	    this._renderTodo();
-	}
+        this.$checkbox.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
+        });
+    }
+
+    connectedCallback() {
+    	// We set a default attribute here; if our end user hasn't provided one,
+    	// our element will display a "placeholder" text instead.
+        if(!this.hasAttribute('text')) {
+            this.setAttribute('text', 'placeholder');
+        }
+
+        this._renderTodoItem();
+    }
+
+    _renderTodoItem() {
+        if (this.hasAttribute('checked')) {
+            this.$item.classList.add('completed');
+            this.$checkbox.setAttribute('checked', '');
+        } else {
+            this.$item.classList.remove('completed');
+            this.$checkbox.removeAttribute('checked');
+        }
+        
+        this.$text.innerHTML = this._text;
+    }
 
 	static get observedAttributes() {
 	    return ['text'];
@@ -379,10 +401,6 @@ class TodoItem extends HTMLElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 	    this._text = newValue;
 	}
-
-	_renderTodo() {
-	    this.$text.innerHTML = this._text;
-	 }
 }
 window.customElements.define('to-do-item', TodoItem);
 
@@ -394,7 +412,7 @@ And lets change our `_renderTodolist` function in `to-do-app.js` to this:
 ```js
 class TodoApp extends HTMLElement {
 
-    	 ...
+    	...
 
         _renderTodoList() {
             this.$todoList.innerHTML = '';
@@ -491,6 +509,7 @@ And change `to-do-item` to this:
 
 ```js
  class TodoItem extends HTMLElement {
+
     ...
 
     static get observedAttributes() {
@@ -622,10 +641,14 @@ _renderTodoList() {
 
 Note how we're setting `$todoItem.setAttribute('index', index);`. We now have some state to keep track of the index of the to-do. We've also set up an event listener to listen for an `onRemove` event on the `to-do-item` element.
 
-Next, we'll have to _fire_ the event when we click the remove button. Change the `connectedCallback` of `to-do-item.js` to the following:
+Next, we'll have to _fire_ the event when we click the remove button. Change the `constructor` of `to-do-item.js` to the following:
 
 ```js
-connectedCallback() {
+constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
+
     this.$item = this._shadowRoot.querySelector('.item');
     this.$removeButton = this._shadowRoot.querySelector('button');
     this.$text = this._shadowRoot.querySelector('label');
@@ -634,8 +657,6 @@ connectedCallback() {
     this.$removeButton.addEventListener('click', (e) => {
         this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
     });
-
-    this._renderTodo();
 }
 ```
 > ✨ _Hey! Listen!_
@@ -704,22 +725,24 @@ And `to-do-item.js`:
 
     ...
 	
-    connectedCallback() {
-        this.$item = this._shadowRoot.querySelector('.item');
-        this.$removeButton = this._shadowRoot.querySelector('button');
-        this.$text = this._shadowRoot.querySelector('label');
-        this.$checkbox = this._shadowRoot.querySelector('input');
+	constructor() {
+	    super();
+	    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+	    this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$removeButton.addEventListener('click', (e) => {
-            this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
-        });
+	    this.$item = this._shadowRoot.querySelector('.item');
+	    this.$removeButton = this._shadowRoot.querySelector('button');
+	    this.$text = this._shadowRoot.querySelector('label');
+	    this.$checkbox = this._shadowRoot.querySelector('input');
 
-        this.$checkbox.addEventListener('click', (e) => {
-            this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
-        });
+	    this.$removeButton.addEventListener('click', (e) => {
+	        this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
+	    });
 
-        this._renderTodo();
-    }
+	    this.$checkbox.addEventListener('click', (e) => {
+	        this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
+	    });
+	}
     
     ...
 

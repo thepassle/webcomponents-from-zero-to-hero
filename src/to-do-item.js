@@ -29,10 +29,6 @@ class TodoItem extends HTMLElement {
         this._shadowRoot = this.attachShadow({ 'mode': 'open' });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this._text = '';
-    }
-
-    connectedCallback() {
         this.$item = this._shadowRoot.querySelector('.item');
         this.$removeButton = this._shadowRoot.querySelector('button');
         this.$text = this._shadowRoot.querySelector('label');
@@ -45,8 +41,14 @@ class TodoItem extends HTMLElement {
         this.$checkbox.addEventListener('click', (e) => {
             this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
         });
+    }
 
-        this._renderTodo();
+    connectedCallback() {
+        if(!this.hasAttribute('text')) {
+            this.setAttribute('text', 'placeholder');
+        }
+
+        this._renderTodoItem();
     }
 
     static get observedAttributes() {
@@ -67,6 +69,18 @@ class TodoItem extends HTMLElement {
         }
     }
 
+    _renderTodoItem() {
+        if (this.hasAttribute('checked')) {
+            this.$item.classList.add('completed');
+            this.$checkbox.setAttribute('checked', '');
+        } else {
+            this.$item.classList.remove('completed');
+            this.$checkbox.removeAttribute('checked');
+        }
+        
+        this.$text.innerHTML = this._text;
+    }
+
     set index(val) {
         this.setAttribute('index', val);
     }
@@ -84,17 +98,6 @@ class TodoItem extends HTMLElement {
             this.setAttribute('checked', '');
         } else {
             this.removeAttribute('checked');
-        }
-    }
-
-    _renderTodo() {
-        this.$text.innerHTML = this._text;
-        if (this._checked) {
-            this.$item.classList.add('completed');
-            this.$checkbox.setAttribute('checked', '');
-        } else {
-            this.$item.classList.remove('completed');
-            this.$checkbox.removeAttribute('checked');
         }
     }
 

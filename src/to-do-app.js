@@ -20,9 +20,10 @@ template.innerHTML = `
         }
     </style>
     <h1>To do</h1>
-
-    <input type="text" placeholder="Add a new to do"></input>
-    <button>✅</button>
+    <form id="todo-input">
+        <input type="text" placeholder="Add a new to do"></input>
+        <button>✅</button>
+    </form>
 
     <ul id="todos"></ul>
 `;
@@ -32,13 +33,10 @@ class TodoApp extends HTMLElement {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open' });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
-    }
 
-    connectedCallback() {
         this.$todoList = this._shadowRoot.querySelector('ul');
-
         this.$input = this._shadowRoot.querySelector('input');
-        this.$input.addEventListener('keyup', (e) => {if (e.keyCode === 13) {this._addTodo()}});
+
         this.$submitButton = this._shadowRoot.querySelector('button');
         this.$submitButton.addEventListener('click', this._addTodo.bind(this));
     }
