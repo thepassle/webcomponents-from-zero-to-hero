@@ -786,3 +786,12 @@ But as you can probably tell, a lot of the code that we've written may feel a li
 "_Web components are neat, but I don't want to spend all this time writing boiler plate and setting stuff imperatively, I want to write declarative code!_", you cry. 
 
 Enter [lit-html](https://polymer.github.io/lit-html/), which we'll cover in the next blog post.
+
+
+## Acknowledgements
+
+I'd like to thank the following people for providing me with feedback or help with this blog post.
+
+- [Julien Lengrand-Lambert](https://twitter.com/jlengrand)
+- [Justin Fagnani](https://twitter.com/justinfagnani)
+- [Benny Powers](https://twitter.com/PowersBenny)
