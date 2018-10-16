@@ -15,6 +15,8 @@ Web components are getting more and more traction. With the Edge team's recent a
 
 So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet. You can take a look at what we'll be making [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/).
 
+Before we start, I'd like to add a little disclaimer that this blogpost is intended to get a better grip of the _basics_ of web components. Web components are low level, and should probably not be used to write full blown applications without the use of any helper libraries, nor should they be compared to full blown frameworks.
+
 ## 🙋 What are web components?
 
 > - [x] Make a demo
@@ -81,9 +83,7 @@ window.customElements.define('my-element', MyElement);
 
 ### constructor()
 
-The `constructor` runs whenever an element is created, but _before_ the element is attached to the document. The constructor can be use for setting some initial state, setting up event listeners, and creating shadow DOM.
-
-We'll use the `constructor` for attaching the shadowroot, and setting up variables.
+The `constructor` runs whenever an element is created, but _before_ the element is attached to the document. We'll use the `constructor` for setting some initial state, event listeners, and creating the shadow DOM.
 
 ### connectedCallback()
 
@@ -211,7 +211,7 @@ What this means is that we now have a DOM tree that will not leak any styles, or
 
 We have a global `h1` styling that makes any h1 in the light DOM a red color. But because we have our h1 in a shadow-root, it does not get overwritten by the global style.
 
-Note how in the component, we've used a `:host` pseudo class, this is how we can add styling to the component from the inside. An important thing to note is that the `display` is always set to `display: inline;`, which means you can't set a width or height on your element. So make sure to set a `:host` display style (e.g. block, inline-block, flex) unless you prefer the default of inline.
+Note how in our `to-do-app` component, we've used a `:host` pseudo class, this is how we can add styling to the component from the inside. An important thing to note is that the `display` is always set to `display: inline;`, which means you can't set a width or height on your element. So make sure to set a `:host` display style (e.g. block, inline-block, flex) unless you prefer the default of inline.
 
 > ✨ _Hey! Listen!_
 > 
@@ -602,9 +602,9 @@ attributeChangedCallback(name, oldValue, newValue) {
 }
 ```
 
-Note how we're parsing the String type value to an integer here, since attributes only allow a String type, but we'd like the end user to be able to get the index _property_ as an integer. And we also now have a nice example of how to deal with string/number/boolean attributes and how to reflect them to properties as their actual type.
+Note how we're parsing the String type value to an integer here, since attributes only allow a String type, but we'd like the end user to be able to get the index _property_ as an integer. And we also now have a nice example of how to deal with string/number/boolean attributes and how to handle attributes and properties as their actual type.
 
-So let's reflect it to a property as well, add the following getters and setters to `to-do-item.js`:
+So let's add some getters and setters to `to-do-item.js`:
 
 ```js
 set index(val) {
