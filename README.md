@@ -429,25 +429,31 @@ class TodoApp extends HTMLElement {
     }
 ```
 
-Alright, a lot of different stuff is going on again. Let's dive in. Previously, when passing some _rich data_ (an array) to our `<to-do-app>` component, we set it like this:
+Alright, a lot of different stuff is going on here. Let's dive in. Previously, when passing some _rich data_ (an array) to our `<to-do-app>` component, we set it like this:
 
 ```js
 document.querySelector('to-do-app').todos = [{ ... }];
 ```
 
-We did that, because `todos` is a _property_ of the element. _Attributes_ are handled differently, and don't allow rich data, in fact, they only allow a String type as a limitation of HTML.
-Properties are more flexible and can handle complex data types like Objects or Arrays.
+We did that, because `todos` is a _property_ of the element. _Attributes_ are handled differently, and don't allow rich data, in fact, they only allow a String type as a limitation of HTML. Properties are more flexible and can handle complex data types like Objects or Arrays.
 
-You've probably used attributes before, but just in case, here's an example of setting an `alt` and a `src` attribute on an image tag.
+The difference is that attributes are defined on HTML elements. When the browser parses the HTML, a corresponding DOM node will be created. This node is an object, and therefore it has _properties_. For example, when the browser parses: `<to-do-item index="1">`, a [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) object will be created. This object already contains several properties, such as `children`, `clientHeight`, `classList`, etc, as well as some methods like `appendChild()` or `click()`. We can also implement our own properties, like we did in our `to-do-app` element, which we gave a `todos` property.
 
-`<img src="myimg.png" alt="my image"/>`
+Here's an example of this in action.
 
-The `alt` and `src` attributes are handled as String types. If we'd want to pass our array of to-do's to our `<to-do-app>` element like this:
+```
+<img src="myimg.png" alt="my image"/>
+```
 
-`<to-do-app todos="[{...}, {...}]"></to-do-app>`
+The browser will parse this `<img>` element, create a [DOM Element object](https://www.w3schools.com/jsref/dom_obj_all.asp), and conveniently set the properties for `src` and `alt` for us. It should be mentioned that this property reflection is not true for _all_ attributes. (Eg: the `value` attribute on an `<input>` element does not reflect. The `value` _property_ of the `<input>` will always be the current text content of the `<input>`, and the `value` _attribute_ will be the initial text content.) We’ll go deeper into reflecting properties to attributes shortly.
 
-We would not get the desired result; we're expecting an array, but actually, the value is simply a String that looks like an array. 
-	
+So we now know that the alt and src _attributes_ are handled as String types, and that if we'd want to pass our array of to-do's to our `<to-do-app>` element like this:
+
+```js
+<to-do-app todos="[{...}, {...}]"></to-do-app>
+```
+
+We would not get the desired result; we're expecting an array, but actually, the value is simply a String that looks like an array.
 	
 > ✨ _Hey! Listen!_
 > 
