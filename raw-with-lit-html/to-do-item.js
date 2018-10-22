@@ -23,6 +23,11 @@ template.innerHTML = `
     </li>
 `;
 
+/*
+TO DO:
+    ADD LIT-HTML HERE
+*/
+
 class TodoItem extends HTMLElement {
     constructor() {
         super();
@@ -67,6 +72,7 @@ class TodoItem extends HTMLElement {
                 this._index = parseInt(newValue);
                 break;
         }
+        this._renderTodoItem();
     }
 
     _renderTodoItem() {
