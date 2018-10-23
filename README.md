@@ -441,7 +441,7 @@ The difference is that attributes are defined on HTML elements. When the browser
 
 Here's an example of this in action.
 
-```
+```html
 <img src="myimg.png" alt="my image"/>
 ```
 
@@ -449,7 +449,7 @@ The browser will parse this `<img>` element, create a [DOM Element object](https
 
 So we now know that the alt and src _attributes_ are handled as String types, and that if we'd want to pass our array of to-do's to our `<to-do-app>` element like this:
 
-```js
+```html
 <to-do-app todos="[{...}, {...}]"></to-do-app>
 ```
 
