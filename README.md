@@ -55,27 +55,27 @@ Let's take a look at a custom element's lifecycle. Consider the following elemen
 
 ```js
 class MyElement extends HTMLElement {
-	constructor() {
-		// always call super() first
-		super(); 
-		console.log('constructed!');
-	}
+    constructor() {
+        // always call super() first
+        super(); 
+        console.log('constructed!');
+    }
 	
-	connectedCallback() {
-		console.log('connected!');
-	}
+    connectedCallback() {
+        console.log('connected!');
+    }
 	
-	disconnectedCallback() {
-		console.log('disconnected!');
-	}
+    disconnectedCallback() {
+        console.log('disconnected!');
+    }
 	
-	attributeChangedCallback(name, oldVal, newVal) {
-		console.log(`Attribute: ${name} changed!`);
-	}
+    attributeChangedCallback(name, oldVal, newVal) {
+        console.log(`Attribute: ${name} changed!`);
+    }
 	
-	adoptedCallback() {
-		console.log('adopted!');
-	}
+    adoptedCallback() {
+        console.log('adopted!');
+    }
 }
 
 window.customElements.define('my-element', MyElement);
@@ -223,7 +223,7 @@ Note how in our `to-do-app` component, we've used a `:host` pseudo class, this i
 > 
 > ### Open shadow DOM:
 > 
-> Since the latest version (V1) of the shadow DOM specification, we can now use `open` or `closed` shadow DOM. Open shadow DOM allows us to create a sub DOM tree next to the light DOM to provide encapsulation for our components. Our shadow DOM can still be pierced by javascript like so: `document.querySelector('our-element').shadowRoot`. One of the downsides of shadow DOM is that web components and still relatively young, and many external libraries don't account for it.
+> Since the latest version (V1) of the shadow DOM specification, we can now use `open` or `closed` shadow DOM. Open shadow DOM allows us to create a sub DOM tree next to the light DOM to provide encapsulation for our components. Our shadow DOM can still be pierced by javascript like so: `document.querySelector('our-element').shadowRoot`. One of the downsides of shadow DOM is that web components are still relatively young, and many external libraries don't account for it.
 > 
 > ### Closed shadow DOM:
 > 
@@ -268,8 +268,8 @@ Now that we have some getters and setters, we can pass some rich data to our ele
 
 ```js
 document.querySelector('to-do-app').todos = [
-	{text: "Make a to-do list", checked: false}, 
-	{text: "Finish blog post", checked: false}
+    {text: "Make a to-do list", checked: false}, 
+    {text: "Finish blog post", checked: false}
 ];
 ```
 
@@ -296,11 +296,11 @@ class TodoApp extends HTMLElement {
     }
 
     _addTodo() {
-		if(this.$input.value.length > 0){
-			this._todos.push({ text: this.$input.value, checked: false })
-			this._renderTodoList();
-			this.$input.value = '';
-		}
+        if(this.$input.value.length > 0){
+            this._todos.push({ text: this.$input.value, checked: false })
+            this._renderTodoList();
+            this.$input.value = '';
+        }
     }
 
     ...
@@ -394,13 +394,13 @@ class TodoItem extends HTMLElement {
         this.$text.innerHTML = this._text;
     }
 
-	static get observedAttributes() {
-	    return ['text'];
-	}
+    static get observedAttributes() {
+        return ['text'];
+    }
 
-	attributeChangedCallback(name, oldValue, newValue) {
-	    this._text = newValue;
-	}
+    attributeChangedCallback(name, oldValue, newValue) {
+        this._text = newValue;
+    }
 }
 window.customElements.define('to-do-item', TodoItem);
 
@@ -634,7 +634,7 @@ _renderTodoList() {
 
         if(todo.checked) {
             $todoItem.setAttribute('checked', '');                
-	    }
+	}
 
         $todoItem.setAttribute('index', index);
         
@@ -727,28 +727,28 @@ class TodoApp extends HTMLElement {
 And `to-do-item.js`:
 
 ```js
- class TodoItem extends HTMLElement {
+class TodoItem extends HTMLElement {
 
     ...
 	
-	constructor() {
-	    super();
-	    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-	    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-	    this.$item = this._shadowRoot.querySelector('.item');
-	    this.$removeButton = this._shadowRoot.querySelector('button');
-	    this.$text = this._shadowRoot.querySelector('label');
-	    this.$checkbox = this._shadowRoot.querySelector('input');
+        this.$item = this._shadowRoot.querySelector('.item');
+        this.$removeButton = this._shadowRoot.querySelector('button');
+        this.$text = this._shadowRoot.querySelector('label');
+        this.$checkbox = this._shadowRoot.querySelector('input');
 
-	    this.$removeButton.addEventListener('click', (e) => {
-	        this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
-	    });
+        this.$removeButton.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
+        });
 
-	    this.$checkbox.addEventListener('click', (e) => {
-	        this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
-	    });
-	}
+        this.$checkbox.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
+        });
+    }
     
     ...
 
@@ -805,4 +805,3 @@ But as you can probably tell, a lot of the code that we've written may feel a li
 "_Web components are neat, but I don't want to spend all this time writing boiler plate and setting stuff imperatively, I want to write declarative code!_", you cry. 
 
 Enter [lit-html](https://polymer.github.io/lit-html/), which we'll cover in the next blog post.
-
