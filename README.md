@@ -771,7 +771,20 @@ Success! We can create, delete, and toggle to-do's!
 
 The last thing I'd like to address in this blog post is browser support. At time of writing, [the Microsoft Edge team has recently announced](https://twitter.com/MSEdgeUpdates/status/1049404076499320835) that they'll be implementing [custom elements](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/customelements/) as well as [shadow DOM](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/shadowdom/), meaning that **all** major browsers will soon natively support web components. 
 
-Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google.
+Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google. Simply import the polyfill:
+
+```
+<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-bundle.js"></script>
+```
+
+I used unpkg for simplicity's sake, but you can also install webcomponentsjs with `NPM`. To make sure the polyfills have succesfully loaded, we can wait for the `WebComponentsReady` event to be fired, like so: 
+
+```
+window.addEventListener('WebComponentsReady', function() {
+    console.log('Web components ready!');
+    // your web components here
+});
+```
 
 ## 💫 Wrapping up
 
