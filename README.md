@@ -478,14 +478,14 @@ We're not done with attributes just yet. It would be nice to be able to check of
 
 This means that only the following examples are acceptable for a true value:
 
-```
+```html
 <div hidden></div>
 <div hidden=""></div>
 <div hidden="hidden"></div>
 ```
 And one for false:
 
-```
+```html
 <div></div>
 ```
 
