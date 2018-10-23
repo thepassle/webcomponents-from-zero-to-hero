@@ -6,8 +6,6 @@ import './to-do-item.js';
 /*
 TO DO:
     - Make _toggle nicer
-    - improve rendering the template, can probably abstract it in a render function
-    - add repeat instead of .map
     - IN BLOG: For this 'stage' of upgrading our raw component:
         So this is pretty nice, but we still have to call `render` a bunch of times, 
         and we haven't done a whole lot to make our setting and getting attributes and properties easier.
@@ -29,9 +27,8 @@ class TodoApp extends HTMLElement {
 
         render(this.template(), this._shadowRoot);
         this.$input = this._shadowRoot.querySelector('input');
-        this.$submitButton = this._shadowRoot.querySelector('button');
-        this.$submitButton.addEventListener('click', this._addTodo.bind(this));
 
+        this._addTodo = this._addTodo.bind(this);
         this._removeTodo = this._removeTodo.bind(this);
         this._toggleTodo = this._toggleTodo.bind(this);
     }
@@ -46,7 +43,7 @@ class TodoApp extends HTMLElement {
         this._todos[e.detail] = Object.assign({}, todo, {
             checked: !todo.checked
         });
-
+        
         render(this.template(), this._shadowRoot);
     }
 
@@ -81,22 +78,21 @@ class TodoApp extends HTMLElement {
             <h1>To do</h1>
             <form id="todo-input">
                 <input type="text" placeholder="Add a new to do"></input>
-                <button>✅</button>
+                <button @click=${this._addTodo}>✅</button>
             </form>
 
             <ul id="todos">
-                ${this.todos.map((todo, index) => {
-                    return html`
+                ${repeat(this.todos, 
+                    (todo) => todo, 
+                    (todo, index) => html`
                         <to-do-item 
                             ?checked=${todo.checked}
                             .index=${index}
                             text=${todo.text}
                             @onRemove=${this._removeTodo}
                             @onToggle=${this._toggleTodo}>    
-                        </to-do-item>
-                    `;
-                })}
- 
+                        </to-do-item>`
+                )}
             </ul>
         `;
     }
