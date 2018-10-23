@@ -3,23 +3,26 @@ import {LitElement, html} from 'https://unpkg.com/@polymer/lit-element@latest/li
 class TodoItem extends LitElement {
     static get properties() {
         return {
-            text: String,
-            checked: { type: Boolean, reflect: true },
+            text: { 
+                type: String,
+                reflect: true
+            },
+            checked: { 
+                type: Boolean, 
+                reflect: true 
+            },
             index: Number
         }
     }
 
     constructor() {
         super();
+        this.text = '';
         this.checked = false;
     }
 
-    _remove() {
-        this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
-    }
-
-    _toggle() {
-        this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
+    _fire(eventType) {
+        this.dispatchEvent(new CustomEvent(eventType, { detail: this.index }));   
     }
 
     render() {
@@ -43,10 +46,10 @@ class TodoItem extends LitElement {
                 <input 
                     type="checkbox" 
                     ?checked=${this.checked} 
-                    @change=${this._toggle}>
+                    @change=${() => this._fire('onToggle')}>
                 </input>
                 <label class=${this.checked ? 'completed' : ''}>${this.text}</label>
-                <button @click=${this._remove}>❌</button>
+                <button @click=${() => this._fire('onRemove')}>❌</button>
             </li>
         `;
     }
