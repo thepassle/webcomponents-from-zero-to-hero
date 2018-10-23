@@ -16,7 +16,7 @@ https://github.com/Polymer/lit-html/issues/361
     Now you see that instead of rendering the list again, it only shuffles around the nodes,
     repeat() solves this by making it possible for lit-html to understand the relationship of items we are rendering. Basically, if you try to render the same item again, it will not create a new node, but instead move the item that we previously rendered to the right place. The key function is there to help lit understand which items are 'the same'.
 
-Render arrays if you are rendering 'pure' items that do not change their own state, and all the state is passed down by the render template. You cannot ever change the state of the rendered items in any way other than rendering them again, or you get the red 1 problem from the first example.
+Render arrays with .map if you are rendering 'pure' items that do not change their own state, and all the state is passed down by the render template. You cannot ever change the state of the rendered items in any way other than rendering them again, or you get the red 1 problem from the first example.
 
 Render with repeat if you are rendering items that manage their own state and have no state passed down. Once the item is rendered it has to manage it's own state completely, since existing items will never be rendered again.
 */
