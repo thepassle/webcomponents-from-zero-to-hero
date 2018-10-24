@@ -501,7 +501,7 @@ _renderTodoList() {
         let $todoItem = document.createElement('to-do-item');
         $todoItem.setAttribute('text', todo.text);
 
-		 // if our to-do is checked, set the attribute, else; omit it.
+	// if our to-do is checked, set the attribute, else; omit it.
         if(todo.checked) {
             $todoItem.setAttribute('checked', '');                
         }
@@ -665,9 +665,12 @@ constructor() {
     });
 }
 ```
+
 > ✨ _Hey! Listen!_
 > 
-> If we set `{ detail: this.index, composed: false }` (which it is by default) end users won't be able to listen for the event outside of your shadow root.
+> We can set `{ detail: this.index, composed: false, bubbles: true }` to let the event bubble out of our components shadow DOM.
+
+
 
 And add the `_removeTodo` function in `to-do-app.js`:
 
