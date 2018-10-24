@@ -31,15 +31,15 @@ First things first: [Web components](https://developer.mozilla.org/en-US/docs/We
 
 But before we start getting our hands dirty, lets take a look at the specifications that let us write web components.
 
-### Custom Elements:
+### Custom Elements
 
 The [Custom Elements](https://w3c.github.io/webcomponents/spec/custom/) api allows us to author our own DOM elements. Using the api, we can define a custom element, and inform the parser how to properly construct that element and how elements of that class should react to changes. Have you ever wanted your own HTML element, like `<my-cool-element>`? Now you can!
 
-### Shadow DOM:
+### Shadow DOM
 
 [Shadow DOM](https://w3c.github.io/webcomponents/spec/custom/) gives us a way to encapsulate the styling and markup of our components. It's a sub DOM tree attached to a DOM element, to make sure none of our styling leaks out, or gets overwritten by any external styles. This makes it great for modularity.
 
-### ES Modules:
+### ES Modules
 
 The [ES Modules](https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system) specification defines the inclusion and reuse of JS documents in a standards based, modular, performant way.
 
