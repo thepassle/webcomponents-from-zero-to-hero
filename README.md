@@ -321,7 +321,7 @@ This should be easy enough to follow, we set up some `querySelectors` and `addEv
 > - [ ] Events
 > - [ ] Wrap it up
 
-This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting properties to attributes. Hold on tight!
+This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting properties to attributes_. Hold on tight!
 
 First, let's create a `<to-do-item>` element.
 
