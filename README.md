@@ -11,7 +11,7 @@ Additionally, lit-html is _not_ a framework. It's simply a javascript library th
 
 Now that we've got that out of the way, let's see how lit-html works.
 
-##Lit-html
+## Lit-html
 
 Lit-html lets you write HTML templates with javascript template literals and efficiently render and re-render those templates to DOM. Tagged template literals are a feature of ES6 that can span multiple lines, and contain javascript expressions. A tagged template literal could look something like this:
 
@@ -184,7 +184,7 @@ And how our new app renders todos:
 ![with-lit](http://thepassle.nl/SGTEST/withlit.gif)
 
 
-##Attributes, properties, and events
+## Attributes, properties, and events
 
 Let's move on and take a look at how lit-html handles attributes, properties, and expressions.
 
@@ -206,7 +206,7 @@ You might have seen this weird syntax in the updated version of our component, a
 
 Let's walk through all of this step by step.
 
-###Attributes
+### Attributes
 
 ```js
 text=${todo.text}
@@ -217,7 +217,7 @@ We set _attributes_ in lit-html... Exactly like you'd set an attribute in standa
 > 
 > Standard attributes are still only limited to String types!
 
-###Boolean attributes
+### Boolean attributes
 
 ```js
 ?checked=${todo.checked}
@@ -244,7 +244,7 @@ As you'll remember from the last blog post, Boolean attributes are generally han
 
 Conveniently enough, lit-html allows us to easily specify our attribute as a _Boolean_ attribute by prefixing the attribute name with a `?`, and then makes sure the attribute is either present, or not.
 
-###Properties
+### Properties
 
 ```js
 .index=${index}
@@ -254,7 +254,7 @@ If we want to pass down some rich data like arrays or objects, or in this case, 
 
 Previously, to set _properties_ on our components, we had to imperatively query for the component, and set the property. Thanks to lit-html, we can handle this declaratively in our template instead.
 
-###Event listeners
+### Event listeners
 
 ```js
 @onRemove=${this._removeTodo}
