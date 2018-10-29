@@ -171,7 +171,7 @@ window.customElements.define('to-do-app', TodoApp);
 
 Got the general overview? Great! You'll find quite a lot things have changed in our code, so let's take a closer look.
 
-The first thing you might have noticed is that the way we handled the rendering of our component has completely changed. In our old app we had to imperatively create a `template` element, set its innerHTML, clone it, and append it to our shadowroot. When we wanted to update our component, we had to completely empty our list, create a bunch of new elements, set their attributes and add their event listeners and append them to the dom. I'm getting a headache just reading that. What we've done instead is delegate all the rendering to lit-html.
+The first thing you might have noticed is that the way we handled the rendering of our component has completely changed. In our old app we had to imperatively create a `template` element, set its innerHTML, clone it, and append it to our shadowroot. When we wanted to update our component, we had to completely empty our list, create a bunch of new elements, set their attributes, add their event listeners and append them to the DOM. I'm getting a headache just reading that. What we've done instead is delegate all the rendering to lit-html.
 
 Now we only declare our template once, we can set attributes, properties and events _declaratively_, and just call lit-html's `render` function when we need to. The great thing about lit-html is that it's _fast_ and _efficient_ at rendering; It looks only at the dynamic expressions, and changes only what _needs_ to be updated, instead of rerendering our list entirely for every change. And all this without the overhead of a framework or VDOM!
 
@@ -270,7 +270,7 @@ A similar example is:
 
 > ✨ _Hey! Listen!_
 > 
-> Remember to `.bind(this)` your event handlers in the `constructor` to ensure we always reference the correct `this` in our handlers.
+> Remember to `.bind(this)` your event handlers in the `constructor` to ensure we always have the correct reference to `this` in our handlers.
 
 
 
