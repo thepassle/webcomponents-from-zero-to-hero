@@ -8,49 +8,79 @@
 	   font-family: 'Roboto', sans-serif;
 	  }
 
-	  iframe {
+	  .content {
 	    width: 100%;
 	    height: calc(100% - 10px);
 	    border: 0;
+
+	    justify-content: center;
+	    flex-direction: column;
+	    display: flex;
 	  }
+
 	  main {
 		display: flex;
 		flex-direction: row;
 	  }
+
 	  nav {
 		color: lightslategrey;
 		padding: 40px;
 		display: flex;
 		flex-direction: column;
 	  }
+
 	  nav ul {
 		list-style-type: none;
 		padding: 0;
 		margin: 0;
 	  }
+
 	  h1, h2{
 		font-family: 'Roboto', sans-serif;
 	  }
+
 	  h1 {
 		margin: 40px 0px 0px 0px;
 		font-size: 40px;
 		line-height: 40px;
 	  }
+
+	  .content h1:first-child {
+		margin-top: 0px;
+	  }
+
+	  .content h1 {
+		font-size: 25px;
+		font-family: Roboto;
+		font-weight: 400;
+	  }
+
+	  .content h2 {
+		font-size: 25px;
+	  }
+
 	  h2 {
 		font-style: italic;
 		margin: 5px 0 0 0;
 		font-size:30px;
 	  }
+
 	  img {
 		width: 200px;
 	  }
+
+
 	  ul a {
 		transition: transform .5s ease;
 	  }
+
 	  ul a:hover, ul a:focus {
 	    transform: scale(1.1);
 	    transition: transform .5s ease;
 	  }
+
+
 	  li a {
 		text-align: center;
 		color: lightslategrey;
@@ -60,24 +90,34 @@
 		line-height: 60px;
 		display: block;
 	  }
+
 	  li:not(:last-child) {
 		border-bottom: 1px solid lightslategrey;
 	  }
+
 	  li:first-child {
 		margin-top: 20px;
 	  }
+
 	  .decobar {
 		width: 100%;
 		height:10px;
 		background-color: blueviolet;
 	  }
+
 		@media only screen and (max-width: 600px) {
 			main {
 				flex-direction: column;
 			}
+
 			h1, h2 {
 				text-align: center;
 			}
+
+			.content h1, .content h2 {
+				padding: 20px;
+			}
+
 			img {
 				display: block;
 				margin-left: auto;
@@ -86,11 +126,12 @@
 		}
 	</style>
 </head>
+
 <body>
 	<div class="decobar"></div>
 	<main>
 		<nav>
-			<a href="index">
+			<a href="/">
 				<img alt="Web Components logo" src="logo.png"/>
 			</a>
 			<h1>Web Components:</h1>
@@ -107,6 +148,15 @@
 				</li>
 			</ul>
 		</nav>
-		<iframe src=""></iframe>
+		<div class="content">
+			<div class="wrapper">
+				<h1>⚡️ Part one:</h1> 
+				<h2><a href="https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/master/part-one">An introduction to writing raw Web Components</a></h2>
+				<h1>🔥 Part two:</h1> 
+				<h2><a href="https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/master/part-two">Supercharging Web Components with lit-html</a></h2>
+				<h1>💥 Part three:</h1> 
+				<h2><a href="https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/master/part-three">Web Components hero with LitElement</a></h2>
+			</div>
+		</div>
 	</main>
 </body>
