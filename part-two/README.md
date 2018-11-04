@@ -7,7 +7,7 @@
 - [Attributes, properties, and events](#-attributes-properties-and-events)
 - [Wrapping up](#-wrapping-up)
 
-If you've followed along with [part one](https://github.com/thepassle/webcomponents-from-zero-to-hero) of this blog series, you'll know the basics of web components by now. If you haven't, I suggest you go back to part one and catch up, because we'll be revisiting, and building on top of a lot of the concepts we covered in part one.
+If you've followed along with [part one](https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/master/part-one) of this blog series, you'll know the basics of web components by now. If you haven't, I suggest you go back to part one and catch up, because we'll be revisiting, and building on top of a lot of the concepts we covered in part one.
 
 In this blog post, we'll be supercharging our to-do application with a rendering library called [lit-html](https://github.com/Polymer/lit-html). But before we dive in, there's a couple of things we need to discuss. If you've paid close attention, you'll have noticed that I referred to our web component as being a _raw_ web component before. I did that, because web components are _low level_, and don't include templating or other features _by design_. Web components were always intended as a collection of standards that do very specific things that the platform didn't allow yet.
 
@@ -141,7 +141,7 @@ So let's see how this works in practice:
 
 [![updating](http://thepassle.nl/SGTEST/litrendering.gif)](https://stackblitz.com/edit/web-components-zero-to-hero-counter?file=demo-element.js)
 
-You can see the full demo [here](https://stackblitz.com/edit/web-components-zero-to-hero-counter?file=demo-element.js) or on [github](https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/part-two). 
+You can see the full demo [here](https://stackblitz.com/edit/web-components-zero-to-hero-counter?file=demo-element.js) or on [github](https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/part-two/counter-demo). 
 
 ```js
 import { html, render } from 'lit-html';
@@ -335,7 +335,7 @@ ${this.todos.map((todo, index) => {
 })}
 ```
 
-You might have seen this weird syntax in the updated version of our component, and wonder what it means. Lit-html allows us to _declaratively_ set our attributes, properties and event handlers in our templates, as opposed to setting them imperatively. Since we learned all about attributes, properties and events in part one of this series, this should be easy enough to follow. If you need a refresher, [I got you covered](https://github.com/thepassle/webcomponents-from-zero-to-hero#-setting-properties).
+You might have seen this weird syntax in the updated version of our component, and wonder what it means. Lit-html allows us to _declaratively_ set our attributes, properties and event handlers in our templates, as opposed to setting them imperatively. Since we learned all about attributes, properties and events in part one of this series, this should be easy enough to follow. If you need a refresher, [I got you covered](https://github.com/thepassle/webcomponents-from-zero-to-hero/tree/master/part-one#-reflecting-properties-to-attributes).
 
 Let's walk through all of this step by step.
 
