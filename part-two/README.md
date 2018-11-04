@@ -74,7 +74,7 @@ Now if we'd write something like this:
 const planet = "world";
 
 function customFunction(strings, ...values) {
-    console.log(strings); // ["<h1>some static content</h1><p>hello ", "</p></p>more static content</p>"]
+    console.log(strings); // ["<h1>some static content</h1><p>hello ", "</p><span>more static content</span>"]
     console.log(values); // ["world"]
 }
 
