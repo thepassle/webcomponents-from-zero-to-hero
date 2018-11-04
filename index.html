@@ -1,24 +1,129 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-bundle.js"></script>
-</head>
-<body>
-	<h1>Web Components: from zero to hero</h1>
-	<ul>
-		<li>
-			<a href="part-one">Part one</a>
-		</li>
-		
-		<li>
-			<a href="part-two">Part two</a>
-		</li>
-		
-		
-		<li>
-			<a href="part-three">Part three</a>
-		</li>
-	</ul>
-</body>
-</html>
 
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+
+<style>
+  * {
+   margin: 0; 
+   font-family: 'Roboto', sans-serif;
+  }
+  
+  iframe {
+    width: 100%;
+    height: calc(100% - 10px);
+    border: 0;
+  }
+
+  main {
+  	display: flex;
+  	flex-direction: row;
+  }
+
+  nav {
+  	color: lightslategrey;
+  	padding: 40px;
+  	display: flex;
+  	flex-direction: column;
+  }
+
+  nav ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+  }
+
+  h1, h2{
+  	font-family: 'Roboto', sans-serif;
+  }
+
+  h1 {
+  	margin: 40px 0px 0px 0px;
+  	font-size: 40px;
+  	line-height: 40px;
+  }
+
+  h2 {
+  	font-style: italic;
+  	margin: 5px 0 0 0;
+  	font-size:30px;
+  }
+
+  img {
+  	width: 200px;
+  }
+
+
+  ul a {
+  	transition: transform .5s ease;
+  }
+
+  ul a:hover, ul a:focus {
+    transform: scale(1.1);
+    transition: transform .5s ease;
+  }
+
+
+  li a {
+  	text-align: center;
+  	color: lightslategrey;
+    text-decoration: none;
+  	font-size: 20px;
+  	height: 60px;
+  	line-height: 60px;
+  	display: block;
+  }
+
+  li:not(:last-child) {
+  	border-bottom: 1px solid lightslategrey;
+  }
+
+  li:first-child {
+  	margin-top: 20px;
+  }
+
+  .decobar {
+  	width: 100%;
+  	height:10px;
+  	background-color: blueviolet;
+  }
+
+	@media only screen and (max-width: 600px) {
+		main {
+		  	flex-direction: column;
+		}
+
+		h1, h2 {
+			text-align: center;
+		}
+
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+</style>
+
+<body>
+	<div class="decobar"></div>
+	<main>
+		<nav>
+			<a href="/">
+				<img alt="Web Components logo" src="logo.png"/>
+			</a>
+			<h1>Web Components:</h1>
+			<h2>From zero to hero</h2>
+			<ul>
+				<li>
+					<a href="part-one">Part one</a>
+				</li>
+				<li>
+					<a href="part-two">Part two</a>
+				</li>
+				<li>
+					<a href="part-three">Part three</a>
+				</li>
+			</ul>
+		</nav>
+		<iframe src=""></iframe>
+	</main>
+</body>
