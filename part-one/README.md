@@ -1,3 +1,4 @@
+
 # Web components: from zero to hero
 ## _An introduction to writing raw web components_
 
@@ -15,7 +16,7 @@ Web components are getting more and more traction. With the Edge team's recent a
 
 So today, we'll be making a to-do app, because the world doesn't have enough implementations of to-do apps yet. You can take a look at what we'll be making [here](https://thepassle.github.io/webcomponents-from-zero-to-hero/).
 
-Before we start, I'd like to add a little disclaimer that this blogpost is intended to get a better grip of the _basics_ of web components. Web components are low level, and should probably not be used to write full blown applications without the use of any helper libraries, nor should they be compared to full blown frameworks.
+Before we start, I'd like to add a little disclaimer that this blogpost is intended to get a better grasp of the _basics_ of web components. Web components are low level, and should probably not be used to write full blown applications without the use of any helper libraries, nor should they be compared to full blown frameworks.
 
 ## 🙋 What are web components?
 
@@ -27,19 +28,19 @@ Before we start, I'd like to add a little disclaimer that this blogpost is inten
 > - [ ] Events
 > - [ ] Wrap it up
 
-First things first: [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML tags. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
+First things first: [Web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) are a set of standards that allow us to write modular, reusable and encapsulated HTML elements. And the best thing about them: since they're based on web standards, we don't have to install any framework or library to start using them. You can start writing web components using vanilla javascript, right now!
 
 But before we start getting our hands dirty, lets take a look at the specifications that let us write web components.
 
-### Custom Elements:
+### Custom Elements
 
 The [Custom Elements](https://w3c.github.io/webcomponents/spec/custom/) api allows us to author our own DOM elements. Using the api, we can define a custom element, and inform the parser how to properly construct that element and how elements of that class should react to changes. Have you ever wanted your own HTML element, like `<my-cool-element>`? Now you can!
 
-### Shadow DOM:
+### Shadow DOM
 
 [Shadow DOM](https://w3c.github.io/webcomponents/spec/custom/) gives us a way to encapsulate the styling and markup of our components. It's a sub DOM tree attached to a DOM element, to make sure none of our styling leaks out, or gets overwritten by any external styles. This makes it great for modularity.
 
-### ES Modules:
+### ES Modules
 
 The [ES Modules](https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system) specification defines the inclusion and reuse of JS documents in a standards based, modular, performant way.
 
@@ -55,27 +56,27 @@ Let's take a look at a custom element's lifecycle. Consider the following elemen
 
 ```js
 class MyElement extends HTMLElement {
-	constructor() {
-		// always call super() first
-		super(); 
-		console.log('constructed!');
-	}
+    constructor() {
+        // always call super() first
+        super(); 
+        console.log('constructed!');
+    }
 	
-	connectedCallback() {
-		console.log('connected!');
-	}
+    connectedCallback() {
+        console.log('connected!');
+    }
 	
-	disconnectedCallback() {
-		console.log('disconnected!');
-	}
+    disconnectedCallback() {
+        console.log('disconnected!');
+    }
 	
-	attributeChangedCallback(name, oldVal, newVal) {
-		console.log(`Attribute: ${name} changed!`);
-	}
+    attributeChangedCallback(name, oldVal, newVal) {
+        console.log(`Attribute: ${name} changed!`);
+    }
 	
-	adoptedCallback() {
-		console.log('adopted!');
-	}
+    adoptedCallback() {
+        console.log('adopted!');
+    }
 }
 
 window.customElements.define('my-element', MyElement);
@@ -223,7 +224,7 @@ Note how in our `to-do-app` component, we've used a `:host` pseudo class, this i
 > 
 > ### Open shadow DOM:
 > 
-> Since the latest version (V1) of the shadow DOM specification, we can now use `open` or `closed` shadow DOM. Open shadow DOM allows us to create a sub DOM tree next to the light DOM to provide encapsulation for our components. Our shadow DOM can still be pierced by javascript like so: `document.querySelector('our-element').shadowRoot`. One of the downsides of shadow DOM is that web components and still relatively young, and many external libraries don't account for it.
+> Since the latest version (V1) of the shadow DOM specification, we can now use `open` or `closed` shadow DOM. Open shadow DOM allows us to create a sub DOM tree next to the light DOM to provide encapsulation for our components. Our shadow DOM can still be pierced by javascript like so: `document.querySelector('our-element').shadowRoot`. One of the downsides of shadow DOM is that web components are still relatively young, and many external libraries don't account for it.
 > 
 > ### Closed shadow DOM:
 > 
@@ -268,8 +269,8 @@ Now that we have some getters and setters, we can pass some rich data to our ele
 
 ```js
 document.querySelector('to-do-app').todos = [
-	{text: "Make a to-do list", checked: false}, 
-	{text: "Finish blog post", checked: false}
+    {text: "Make a to-do list", checked: false}, 
+    {text: "Finish blog post", checked: false}
 ];
 ```
 
@@ -296,11 +297,11 @@ class TodoApp extends HTMLElement {
     }
 
     _addTodo() {
-		if(this.$input.value.length > 0){
-			this._todos.push({ text: this.$input.value, checked: false })
-			this._renderTodoList();
-			this.$input.value = '';
-		}
+        if(this.$input.value.length > 0){
+            this._todos.push({ text: this.$input.value, checked: false })
+            this._renderTodoList();
+            this.$input.value = '';
+        }
     }
 
     ...
@@ -321,7 +322,7 @@ This should be easy enough to follow, we set up some `querySelectors` and `addEv
 > - [ ] Events
 > - [ ] Wrap it up
 
-This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting properties to attributes. Hold on tight!
+This is where things will get confusing, as we'll be exploring the differences between _attributes_ and _properties_, and we'll also be _reflecting properties to attributes_. Hold on tight!
 
 First, let's create a `<to-do-item>` element.
 
@@ -394,13 +395,13 @@ class TodoItem extends HTMLElement {
         this.$text.innerHTML = this._text;
     }
 
-	static get observedAttributes() {
-	    return ['text'];
-	}
+    static get observedAttributes() {
+        return ['text'];
+    }
 
-	attributeChangedCallback(name, oldValue, newValue) {
-	    this._text = newValue;
-	}
+    attributeChangedCallback(name, oldValue, newValue) {
+        this._text = newValue;
+    }
 }
 window.customElements.define('to-do-item', TodoItem);
 
@@ -429,25 +430,31 @@ class TodoApp extends HTMLElement {
     }
 ```
 
-Alright, a lot of different stuff is going on again. Let's dive in. Previously, when passing some _rich data_ (an array) to our `<to-do-app>` component, we set it like this:
+Alright, a lot of different stuff is going on here. Let's dive in. Previously, when passing some _rich data_ (an array) to our `<to-do-app>` component, we set it like this:
 
 ```js
 document.querySelector('to-do-app').todos = [{ ... }];
 ```
 
-We did that, because `todos` is a _property_ of the element. _Attributes_ are handled differently, and don't allow rich data, in fact, they only allow a String type as a limitation of HTML.
-Properties are more flexible and can handle complex data types like Objects or Arrays.
+We did that, because `todos` is a _property_ of the element. _Attributes_ are handled differently, and don't allow rich data, in fact, they only allow a String type as a limitation of HTML. Properties are more flexible and can handle complex data types like Objects or Arrays.
 
-You've probably used attributes before, but just in case, here's an example of setting an `alt` and a `src` attribute on an image tag.
+The difference is that attributes are defined on HTML elements. When the browser parses the HTML, a corresponding DOM node will be created. This node is an object, and therefore it has _properties_. For example, when the browser parses: `<to-do-item index="1">`, a [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) object will be created. This object already contains several properties, such as `children`, `clientHeight`, `classList`, etc, as well as some methods like `appendChild()` or `click()`. We can also implement our own properties, like we did in our `to-do-app` element, which we gave a `todos` property.
 
-`<img src="myimg.png" alt="my image"/>`
+Here's an example of this in action.
 
-The `alt` and `src` attributes are handled as String types. If we'd want to pass our array of to-do's to our `<to-do-app>` element like this:
+```html
+<img src="myimg.png" alt="my image"/>
+```
 
-`<to-do-app todos="[{...}, {...}]"></to-do-app>`
+The browser will parse this `<img>` element, create a [DOM Element object](https://www.w3schools.com/jsref/dom_obj_all.asp), and conveniently set the properties for `src` and `alt` for us. It should be mentioned that this property reflection is not true for _all_ attributes. (Eg: the `value` attribute on an `<input>` element does not reflect. The `value` _property_ of the `<input>` will always be the current text content of the `<input>`, and the `value` _attribute_ will be the initial text content.) We’ll go deeper into reflecting properties to attributes shortly.
 
-We would not get the desired result; we're expecting an array, but actually, the value is simply a String that looks like an array. 
-	
+So we now know that the alt and src _attributes_ are handled as String types, and that if we'd want to pass our array of to-do's to our `<to-do-app>` element like this:
+
+```html
+<to-do-app todos="[{...}, {...}]"></to-do-app>
+```
+
+We would not get the desired result; we're expecting an array, but actually, the value is simply a String that looks like an array.
 	
 > ✨ _Hey! Listen!_
 > 
@@ -472,14 +479,14 @@ We're not done with attributes just yet. It would be nice to be able to check of
 
 This means that only the following examples are acceptable for a true value:
 
-```
+```html
 <div hidden></div>
 <div hidden=""></div>
 <div hidden="hidden"></div>
 ```
 And one for false:
 
-```
+```html
 <div></div>
 ```
 
@@ -495,7 +502,7 @@ _renderTodoList() {
         let $todoItem = document.createElement('to-do-item');
         $todoItem.setAttribute('text', todo.text);
 
-		 // if our to-do is checked, set the attribute, else; omit it.
+	// if our to-do is checked, set the attribute, else; omit it.
         if(todo.checked) {
             $todoItem.setAttribute('checked', '');                
         }
@@ -628,7 +635,7 @@ _renderTodoList() {
 
         if(todo.checked) {
             $todoItem.setAttribute('checked', '');                
-	    }
+	}
 
         $todoItem.setAttribute('index', index);
         
@@ -659,9 +666,12 @@ constructor() {
     });
 }
 ```
+
 > ✨ _Hey! Listen!_
 > 
-> If we set `{ detail: this.index, composed: false }` (which it is by default) end users won't be able to listen for the event outside of your shadow root.
+> We can set `{ detail: this.index, composed: false, bubbles: true }` to let the event bubble out of our components shadow DOM.
+
+
 
 And add the `_removeTodo` function in `to-do-app.js`:
 
@@ -721,28 +731,28 @@ class TodoApp extends HTMLElement {
 And `to-do-item.js`:
 
 ```js
- class TodoItem extends HTMLElement {
+class TodoItem extends HTMLElement {
 
     ...
 	
-	constructor() {
-	    super();
-	    this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-	    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-	    this.$item = this._shadowRoot.querySelector('.item');
-	    this.$removeButton = this._shadowRoot.querySelector('button');
-	    this.$text = this._shadowRoot.querySelector('label');
-	    this.$checkbox = this._shadowRoot.querySelector('input');
+        this.$item = this._shadowRoot.querySelector('.item');
+        this.$removeButton = this._shadowRoot.querySelector('button');
+        this.$text = this._shadowRoot.querySelector('label');
+        this.$checkbox = this._shadowRoot.querySelector('input');
 
-	    this.$removeButton.addEventListener('click', (e) => {
-	        this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
-	    });
+        this.$removeButton.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onRemove', { detail: this.index }));
+        });
 
-	    this.$checkbox.addEventListener('click', (e) => {
-	        this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
-	    });
-	}
+        this.$checkbox.addEventListener('click', (e) => {
+            this.dispatchEvent(new CustomEvent('onToggle', { detail: this.index }));
+        });
+    }
     
     ...
 
@@ -765,7 +775,20 @@ Success! We can create, delete, and toggle to-do's!
 
 The last thing I'd like to address in this blog post is browser support. At time of writing, [the Microsoft Edge team has recently announced](https://twitter.com/MSEdgeUpdates/status/1049404076499320835) that they'll be implementing [custom elements](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/customelements/) as well as [shadow DOM](https://developer.microsoft.com/en-us/microsoft-edge/platform/status/shadowdom/), meaning that **all** major browsers will soon natively support web components. 
 
-Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google.
+Until that time, you can make use of the [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs) polyfills, maintained by Google. Simply import the polyfill:
+
+```html
+<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-bundle.js"></script>
+```
+
+I used unpkg for simplicity's sake, but you can also install webcomponentsjs with `NPM`. To make sure the polyfills have succesfully loaded, we can wait for the `WebComponentsReady` event to be fired, like so: 
+
+```js
+window.addEventListener('WebComponentsReady', function() {
+    console.log('Web components ready!');
+    // your web components here
+});
+```
 
 ## 💫 Wrapping up
 
