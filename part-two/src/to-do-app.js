@@ -1,49 +1,20 @@
+import { html, render } from 'https://unpkg.com/lit-html@0.12.0/lit-html.js?module';
 import './to-do-item.js';
-
-const template = document.createElement('template');
-template.innerHTML = `
-    <style>
-        :host {
-            display: block;
-            font-family: sans-serif;
-            text-align: center;
-        }
-
-        button {
-            border: none;
-            cursor: pointer;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-    </style>
-    <h1>To do</h1>
-    <form id="todo-input">
-        <input type="text" placeholder="Add a new to do"></input>
-        <button>✅</button>
-    </form>
-
-    <ul id="todos"></ul>
-`;
 
 class TodoApp extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open' });
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
+        this.todos = [];
 
-        this.$todoList = this._shadowRoot.querySelector('ul');
+        render(this.template(), this._shadowRoot, {eventContext: this});
+
         this.$input = this._shadowRoot.querySelector('input');
-
-        this.$submitButton = this._shadowRoot.querySelector('button');
-        this.$submitButton.addEventListener('click', this._addTodo.bind(this));
     }
 
     _removeTodo(e) {
         this._todos.splice(e.detail, 1);
-        this._renderTodoList();
+        render(this.template(), this._shadowRoot, {eventContext: this});
     }
 
     _toggleTodo(e) {
@@ -51,40 +22,59 @@ class TodoApp extends HTMLElement {
         this._todos[e.detail] = Object.assign({}, todo, {
             checked: !todo.checked
         });
-        this._renderTodoList();
+
+        render(this.template(), this._shadowRoot, {eventContext: this});
     }
 
-    _addTodo() {
+    _addTodo(e) {
+        e.preventDefault();
         if(this.$input.value.length > 0){
             this._todos.push({ text: this.$input.value, checked: false })
-            this._renderTodoList();
+            render(this.template(), this._shadowRoot, {eventContext: this});
             this.$input.value = '';
         }
     }
 
-    _renderTodoList() {
-        this.$todoList.innerHTML = '';
-
-        this._todos.forEach((todo, index) => {
-            let $todoItem = document.createElement('to-do-item');
-            $todoItem.setAttribute('text', todo.text);
-
-            if(todo.checked) {
-                $todoItem.setAttribute('checked', '');
-            }
-
-            $todoItem.setAttribute('index', index);
-            
-            $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
-            $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
-
-            this.$todoList.appendChild($todoItem);
-        });
+    template() {
+        return html`
+            <style>
+                :host {
+                    display: block;
+                    font-family: sans-serif;
+                    text-align: center;
+                }
+                button {
+                    border: none;
+                    cursor: pointer;
+                }
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+            </style>
+            <h1>To do</h1>
+            <form id="todo-input">
+                <input type="text" placeholder="Add a new to do"></input>
+                <button @click=${this._addTodo}>✅</button>
+            </form>
+            <ul id="todos">
+              ${this.todos.map((todo, index) => html`
+                    <to-do-item 
+                        ?checked=${todo.checked}
+                        .index=${index}
+                        text=${todo.text}
+                        @onRemove=${this._removeTodo}
+                        @onToggle=${this._toggleTodo}>    
+                    </to-do-item>
+                  `
+              )}
+            </ul>
+        `;
     }
 
     set todos(value) {
         this._todos = value;
-        this._renderTodoList();
+        render(this.template(), this._shadowRoot, {eventContext: this});
     }
 
     get todos() {
