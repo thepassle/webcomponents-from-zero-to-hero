@@ -13,7 +13,7 @@ In this blog post, we'll be supercharging our to-do application with a rendering
 
 I'd like to quote [Justin Fagnani](https://twitter.com/justinfagnani/status/1052216976586592257) by saying that all web components do is give the developer a _when_ and a _where_. The _when_ being element creation, instantiation, connecting, disconnecting, etc. The _where_ being the element instance and the shadowroot. What you do with that is up to you.
 
-Additionally, lit-html is _not_ a framework. It's simply a javascript library that leverages standard javascript language features. The difference between a library and a framework is often a controversial subject, but I'd like to define it as this analogy by [Dave Cheney](https://twitter.com/davecheney/status/1058502133530542080):
+Additionally, lit-html is _not_ a framework. It's simply a javascript library that leverages standard javascript language features. The difference between libraries and frameworks is often a controversial subject, but I'd like to define it as this analogy by [Dave Cheney](https://twitter.com/davecheney/status/1058502133530542080):
 
 > Frameworks are based on the Hollywood Pattern; don’t call us, we’ll call you.
 
