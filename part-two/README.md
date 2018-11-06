@@ -223,12 +223,12 @@ class TodoApp extends HTMLElement {
         this._shadowRoot = this.attachShadow({ 'mode': 'open' });
 
         this.todos = [
-          { text: 'Learn about Lit-html', checked: true },
-          { text: 'Lit-html in practice', checked: false },
-          { text: 'Supercharge our web component', checked: false },
-          { text: 'Attributes, properties, and events', checked: false },
-          { text: 'Wrapping up', checked: false }
-        ];
+	    { text: 'Learn about Lit-html', checked: true },
+	    { text: 'Lit-html in practice', checked: false },
+	    { text: 'Supercharge our web component', checked: false },
+	    { text: 'Attributes, properties, and events', checked: false },
+	    { text: 'Wrapping up', checked: false }
+	];
 
         render(this.template(), this._shadowRoot, {eventContext: this});
 
@@ -236,26 +236,23 @@ class TodoApp extends HTMLElement {
     }
 
     _removeTodo(e) {
-        this._todos.splice(e.detail, 1);
-        render(this.template(), this._shadowRoot, {eventContext: this});
+      this.todos = this.todos.filter((todo,index) => {
+          return index !== e.detail;
+      });
     }
 
     _toggleTodo(e) {
-        const todo = this._todos[e.detail];
-        this._todos[e.detail] = Object.assign({}, todo, {
-            checked: !todo.checked
-        });
-
-        render(this.template(), this._shadowRoot, {eventContext: this});
+      this.todos = this.todos.map((todo, index) => {
+          return index === e.detail ? {...todo, checked: !todo.checked} : todo;
+      });
     }
 
     _addTodo(e) {
-        e.preventDefault();
-        if(this.$input.value.length > 0){
-            this._todos.push({ text: this.$input.value, checked: false })
-            render(this.template(), this._shadowRoot, {eventContext: this});
-            this.$input.value = '';
-        }
+      e.preventDefault();
+      if(this.$input.value.length > 0) {
+          this.todos = [...this.todos, { text: this.$input.value, checked: false }];
+          this.$input.value = '';
+      }
     }
 
     template() {
@@ -269,12 +266,15 @@ class TodoApp extends HTMLElement {
                 button {
                     border: none;
                     cursor: pointer;
+                    background-color: Transparent;
                 }
                 ul {
                     list-style: none;
                     padding: 0;
                 }
             </style>
+            <h3>Raw web components + lit-html</h3>
+            <br>
             <h1>To do</h1>
             <form id="todo-input">
                 <input type="text" placeholder="Add a new to do"></input>
