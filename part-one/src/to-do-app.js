@@ -19,6 +19,8 @@ template.innerHTML = `
             padding: 0;
         }
     </style>
+    <h3>Raw web components</h3>
+    <br>
     <h1>To do</h1>
     <form id="todo-input">
         <input type="text" placeholder="Add a new to do"></input>
