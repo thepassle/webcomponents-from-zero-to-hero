@@ -314,6 +314,7 @@ The first thing you might have noticed is that the way we handled the rendering 
 
 Now we only declare our template once, we can set attributes, properties and events _declaratively_ in the template, and just call lit-html's `render` function when we need to. The great thing about lit-html is that it's _fast_ and _efficient_ at rendering; It looks only at the dynamic expressions, and changes only what _needs_ to be updated. And all this without the overhead of a framework!
 
+# !!! Explain how we're rerendering by changing the todos property. (the _addTodo etc methods)
 
 ## 🔨 Attributes, properties, and events
 
