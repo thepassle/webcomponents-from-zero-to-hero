@@ -108,8 +108,8 @@ const sayHello = (name) => html`
 	<h1>Hello ${name}</h1>
 `;
 
-sayHi('world');
-sayHi('universe');
+sayHello('world');
+sayHello('universe');
 ```
 
 Both these templates will share the exact same `<template>` for efficiency, the only thing that's different is the data we're passing it. And if you paid close attention, you'll remember that we used the same technique in part one of this blog series.
