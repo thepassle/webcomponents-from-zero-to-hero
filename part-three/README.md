@@ -1,6 +1,8 @@
 
 ## 💥 LitElement 💥
 
+### Web Components hero with LitElement
+
 >- [x] Recap
 >- [ ] Properties and attributes
 >- [ ] Lifecycle and rerendering
