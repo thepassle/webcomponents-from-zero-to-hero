@@ -160,7 +160,7 @@ import './to-do-item.js';
 class TodoApp extends LitElement {
     static get properties() {
         return {
-            todos: Array
+            todos: { type: Array }
         }
     }
 
