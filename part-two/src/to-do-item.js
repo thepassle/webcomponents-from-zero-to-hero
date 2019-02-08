@@ -1,4 +1,4 @@
-import { html, render } from 'https://unpkg.com/lit-html@0.12.0/lit-html.js?module';
+import { html, render } from 'https://unpkg.com/lit-html@1.0.0/lit-html.js?module';
 
 class TodoItem extends HTMLElement {
     constructor() {
