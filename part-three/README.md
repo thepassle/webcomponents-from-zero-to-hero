@@ -1,5 +1,10 @@
 
-##💥 LitElement 💥
+## 💥 LitElement 💥
+
+>- [x] Recap
+>- [ ] Properties and attributes
+>- [ ] Lifecycle and rerendering
+>- [ ] Conclusion
 
 Lit-html and LitElement finally got their official (1.0 and 2.0 respectively) releases, and that makes it a great time to wrap up the Web Components: from Zero to Hero blog series. I hope you've found these blogs useful as you've read them; they've been a blast to write, and I very much appreciate all the feedback and response I've gotten!
 
@@ -46,21 +51,21 @@ class TodoItem extends LitElement {
     }
     
     static get styles() {
-    	return css`
-			:host {
-				display: block;
-				font-family: sans-serif;
-			}
+      return css`
+	  :host {
+	    display: block;
+	    font-family: sans-serif;
+	  }
 			
-			.completed {
-				text-decoration: line-through;
-			}
+	  .completed {
+	    text-decoration: line-through;
+	  }
 			
-			button {
-				cursor: pointer;
-				border: none;
-			}
-    	`;
+	  button {
+	    cursor: pointer;
+	    border: none;
+	  }
+      `;
     }
 
     render() {
@@ -79,7 +84,12 @@ class TodoItem extends LitElement {
 }
 ```
 
-###Properties and attributes
+### 💅 Properties and attributes
+
+>- [x] Recap
+>- [x] Properties and attributes
+>- [ ] Lifecycle and rerendering
+>- [ ] Conclusion
 
 Let's get straight into it. The first thing you might notice is that all of our setters and getters are gone, and have been replaced with LitElement's static properties getter. This is _great_, because we've abstracted away a lot of boiler plate code and instead let LitElement take care of it.
 
@@ -131,7 +141,12 @@ Additionally, and perhaps most importantly, the static properties getter will re
 > 
 > You _can_ still use custom getters and setters, but you'll have to manually call `this.requestUpdate()` to trigger a rerender. Custom getters and setters can be useful for computed properties.
 
-###♻️ Lifecycle and rerendering
+### ♻️ Lifecycle and rerendering
+
+>- [x] Recap
+>- [x] Properties and attributes
+>- [x] Lifecycle and rerendering
+>- [ ] Conclusion
 
 Finally, let's take a look at our `to-do-app` component:
 
@@ -177,21 +192,21 @@ class TodoApp extends LitElement {
     }
 
 	static get styles() {
-		return css`
-	        :host {
-	            display: block;
-	            font-family: sans-serif;
-	            text-align: center;
-	        }
-	        button {
-	            border: none;
-	            cursor: pointer;
-	        }
-	        ul {
-	            list-style: none;
-	            padding: 0;
-	        }
-		`;
+	  return css`
+	     :host {
+	         display: block;
+	         font-family: sans-serif;
+	         text-align: center;
+	     }
+	     button {
+	         border: none;
+	         cursor: pointer;
+	     }
+	     ul {
+	         list-style: none;
+	         padding: 0;
+	     }
+          `;
 	}
 
     render() {
@@ -250,6 +265,11 @@ And as I mentioned before, you can still implement `connectedCallback()` and `di
 
 
 ### Conclusion
+
+>- [x] Recap
+>- [x] Properties and attributes
+>- [x] Lifecycle
+>- [x] Conclusion
 
 If you've made it all this way; congratulations! You are now a web components super hero. I hope this blog series was helpful and informative to you, and that it may function as a reference for when you need to remember something about web components.
 
