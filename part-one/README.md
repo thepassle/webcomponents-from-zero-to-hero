@@ -669,7 +669,7 @@ constructor() {
 
 > ✨ _Hey! Listen!_
 > 
-> We can set `{ detail: this.index, composed: false, bubbles: true }` to let the event bubble out of our components shadow DOM.
+> We can set `{ detail: this.index, composed: true, bubbles: true }` to let the event bubble out of our components shadow DOM.
 
 
 
