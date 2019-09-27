@@ -56,9 +56,10 @@ class TodoApp extends HTMLElement {
         this._renderTodoList();
     }
 
-    _addTodo() {
+    _addTodo(e) {
+        e.preventDefault();
         if(this.$input.value.length > 0){
-            this._todos.push({ text: this.$input.value, checked: false })
+            this._todos.push({ text: this.$input.value, checked: false });
             this._renderTodoList();
             this.$input.value = '';
         }
@@ -76,7 +77,7 @@ class TodoApp extends HTMLElement {
             }
 
             $todoItem.setAttribute('index', index);
-            
+
             $todoItem.addEventListener('onRemove', this._removeTodo.bind(this));
             $todoItem.addEventListener('onToggle', this._toggleTodo.bind(this));
 
